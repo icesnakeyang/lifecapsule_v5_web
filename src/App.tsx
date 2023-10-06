@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
 import './App.css';
+import {BrowserRouter} from "react-router-dom";
+import Routers from './router/Index';
+import {CssBaseline, ThemeProvider} from "@mui/material";
+import {darkTheme, lightTheme, redTheme} from "./pages/common/Theme";
+import {useDispatch, useSelector} from "react-redux";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const themeMode = useSelector((state: any) => state.commonSlice.themeMode)
+
+    useEffect(() => {
+        console.log('主题颜色改变了')
+        console.log(themeMode)
+
+    }, [themeMode])
+
+    return (
+        <BrowserRouter>
+            <ThemeProvider theme={themeMode === 'light' ? lightTheme : themeMode === 'red' ? redTheme : darkTheme}>
+                <CssBaseline/>
+                <div className="App">
+                    <Routers/>
+                </div>
+            </ThemeProvider>
+        </BrowserRouter>
+    );
 }
 
 export default App;
