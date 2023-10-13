@@ -24,7 +24,7 @@ const SettingBar = () => {
                     fontSize: 20,
                     color: theme.palette.primary.main
                 }}>
-                    <Hidden mdDown>
+                    <Hidden smDown>
                         <span style={{fontSize:16}}>
                         {t('nav.setting')}
                         </span>

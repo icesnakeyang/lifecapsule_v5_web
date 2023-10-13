@@ -45,7 +45,12 @@
     "donate": "打赏",
     "signIn": "登录",
     "back": "返回",
-    "inbox": "消息"
+    "inbox": "消息",
+    "privateDiary": "私密笔记",
+    "lastWords": "遗言",
+    "loveLetter": "情书",
+    "toFuture": "给未来的信",
+    "Inspiration": "灵感启发"
   },
   "login": {
     "tabEmail": "Email",
@@ -390,6 +395,12 @@
     "password2": "确认密码",
     "btBindEmail": "绑定Email"
   },
+  "noteList": {
+    "noNote": "你目前还没有创建笔记,",
+    "btCreateNow": "创建笔记",
+    "btCreateNewNote": "新建笔记",
+    "btNew": "新笔记"
+  },
   "note": {
     "noteList": "我的笔记",
     "noteEdit": "编辑笔记",
@@ -560,7 +571,8 @@
     "btSave": "保存项目",
     "tipSaveSuccess": "保存项目成功！",
     "projectNameHolder": "请输入项目名称",
-    "currentProject": "当前项目"
+    "currentProject": "当前项目",
+    "noProject": "你还没有创建项目"
   },
   "syserr": {
     "10001": "系统错误",

@@ -35,12 +35,6 @@ const Header1 = () => {
                 <Toolbar>
                     <TitleBox1/>
                     <Box sx={{marginLeft: 'auto'}}>
-                        <MyNoteBar/>
-                    </Box>
-                    <Box sx={{marginLeft: 'auto'}}>
-                        <InboxBar/>
-                    </Box>
-                    <Box sx={{marginLeft: 'auto'}}>
                         <DonateBar/>
                     </Box>
                     <Box sx={{marginLeft: 'auto'}}>

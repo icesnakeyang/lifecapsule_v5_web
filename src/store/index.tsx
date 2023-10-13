@@ -8,6 +8,8 @@ import commonSlice from "./commonSlice";
 import noteDataSlice from "./noteDataSlice";
 import tagSlice from "./tagSlice";
 import noteReceiveSlice from "./noteReceiveSlice";
+import projectSlice from "./projectSlice";
+import taskTodoSlice from "./taskTodoSlice";
 
 const persistConfig = {
     key: 'root',
@@ -20,7 +22,9 @@ const rootReducer = combineReducers({
     commonSlice,
     noteDataSlice,
     tagSlice,
-    noteReceiveSlice
+    noteReceiveSlice,
+    projectSlice,
+    taskTodoSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

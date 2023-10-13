@@ -14,7 +14,6 @@ const MyReceiveNoteRow = (data: any) => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    // @ts-ignore
     return (
         <Card
             // style={{marginTop: 10, background: theme.palette.background.default}}

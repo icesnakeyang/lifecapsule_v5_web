@@ -3,7 +3,7 @@ import {
     AlertColor,
     Box,
     Breadcrumbs,
-    Button,
+    Button, CircularProgress,
     Container,
     Dialog, DialogActions, DialogContent, DialogContentText,
     Snackbar,
@@ -402,19 +402,17 @@ const NoteEdit = () => {
                             />
                         </Box>
 
-                        <Box
-                            sx={{
+                        <div
+                            style={{
                                 width: "100%",
                                 justifyContent: "center",
                                 alignItems: "center",
                                 display: "flex",
-                                marginTop: 1
+                                marginTop: 20
                             }}
                         >
                             {saving ? (
-                                <Button variant='contained' style={{width: "100px"}}>
-                                    {t("common.btSaving")}
-                                </Button>
+                                <CircularProgress/>
                             ) : (
                                 <>
                                     {editing ? (
@@ -430,7 +428,7 @@ const NoteEdit = () => {
                                     ) : null}
                                 </>
                             )}
-                        </Box>
+                        </div>
                     </Box>
                 </Box>
 

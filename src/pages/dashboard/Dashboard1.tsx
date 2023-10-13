@@ -23,6 +23,7 @@ import {useTheme} from "@mui/material/styles";
 import {saveNoteList} from "../../store/noteDataSlice";
 import NoteRowDashboard from "./NoteRowDashboard";
 import ReceiveNoteRowDashboard from "./ReceiveNoteRowDashboard";
+import Header2 from "../common/Header2";
 
 const Dashboard1 = () => {
     const {t} = useTranslation()
@@ -107,105 +108,114 @@ const Dashboard1 = () => {
             {/*header bar*/}
             <Header1/>
 
-            {/*timer*/}
-            <div style={{display: 'flex', justifyContent: "center"}}>
-                <div style={{padding: 10}}>
-                    <div style={{marginTop: 80, fontSize: 20}}>
-                        <Stack direction='row' sx={{}}>
-                            <Box sx={{margin: 2, color: theme.palette.primary.main}}>
-                                {t('dashboard.tip1')}
-                            </Box>
-                            <Box sx={{margin: 2, fontSize: 20, fontWeight: 'bold', color: theme.palette.primary.main}}>
-                                {nickname}
-                            </Box>
-                        </Stack>
+            <div style={{display: 'flex', justifyContent: 'center', marginTop: 60}}>
+                <div style={{ width: '100%', maxWidth: 1080}}>
+                    <Header2/>
+                    {/*timer*/}
+                    <div style={{display: 'flex', justifyContent: "center"}}>
+                        <div style={{padding: 10}}>
+                            <div style={{marginTop: 20, fontSize: 20}}>
+                                <Stack direction='row' sx={{}}>
+                                    <Box sx={{margin: 2, color: theme.palette.primary.main}}>
+                                        {t('dashboard.tip1')}
+                                    </Box>
+                                    <Box sx={{
+                                        margin: 2,
+                                        fontSize: 20,
+                                        fontWeight: 'bold',
+                                        color: theme.palette.primary.main
+                                    }}>
+                                        {nickname}
+                                    </Box>
+                                </Stack>
+                            </div>
+                            <Paper sx={{
+                                textAlign: 'center',
+                                margin: 0,
+                                width: '100%',
+                                maxWidth: 600,
+                                padding: 2,
+                                background: theme.palette.background.default,
+                                color: theme.palette.primary.main
+                            }}>
+                                <Typography variant="h5" gutterBottom>
+                                    {t('dashboard.tip2')}
+                                </Typography>
+                                <TimerBoard1/>
+                                <Typography variant='body1' sx={{marginTop: 1}}>
+                                    {t("dashboard.tip3")}
+                                </Typography>
+                                <Box sx={{marginTop: 2}}>
+                                    <Button variant="contained"
+                                            sx={{background: theme.palette.primary.main}}
+                                            onClick={() => {
+                                                snoozePrimaryTimer()
+                                            }}>SNOOZE</Button>
+                                </Box>
+                                <Typography variant='body1' sx={{marginTop: 1}}>
+                                    {t("dashboard.tip4")}
+                                </Typography>
+                            </Paper>
+                        </div>
                     </div>
-                    <Paper sx={{
-                        textAlign: 'center',
-                        margin: 0,
-                        width: '100%',
-                        maxWidth: 600,
-                        padding: 2,
-                        background: theme.palette.background.default,
-                        color: theme.palette.primary.main
-                    }}>
-                        <Typography variant="h5" gutterBottom>
-                            {t('dashboard.tip2')}
-                        </Typography>
-                        <TimerBoard1/>
-                        <Typography variant='body1' sx={{marginTop: 1}}>
-                            {t("dashboard.tip3")}
-                        </Typography>
-                        <Box sx={{marginTop: 2}}>
-                            <Button variant="contained"
-                                    sx={{background: theme.palette.primary.main}}
-                                    onClick={() => {
-                                        snoozePrimaryTimer()
-                                    }}>SNOOZE</Button>
-                        </Box>
-                        <Typography variant='body1' sx={{marginTop: 1}}>
-                            {t("dashboard.tip4")}
-                        </Typography>
-                    </Paper>
+                    {/*</Box>*/}
+
+                    {/*recent notes*/}
+                    <Box display='flex' justifyContent='center' sx={{padding: 1, marginTop: 2}}>
+                        <Paper sx={{
+                            width: '100%',
+                            padding: 1,
+                            background: theme.palette.background.default,
+                            textAlign: 'center',
+                            border: '1px solid',
+                            borderColor: theme.palette.primary.main
+                        }}>
+                            <Button variant='contained' size="small" onClick={() => {
+                                navigate('/NoteList')
+                            }}>{t('dashboard.recentNotes')}</Button>
+                            <div style={{marginTop: 20}}></div>
+                            {noteList.length > 0 ?
+                                noteList.map((item, index) => (
+                                    <NoteRowDashboard data={item} key={index}/>
+                                ))
+                                :
+                                <Box>
+                                    {t('dashboard.noNotes')}
+                                </Box>
+
+                            }
+                        </Paper>
+                    </Box>
+
+                    {/*Recently received notes*/}
+                    <Box display='flex' justifyContent='center' sx={{padding: 1, marginTop: 2}}>
+                        <Paper sx={{
+                            width: '100%',
+                            padding: 1,
+                            background: theme.palette.background.default,
+                            textAlign: 'center',
+                            border: '1px solid',
+                            borderColor: theme.palette.primary.main
+                        }}>
+                            <Button variant='contained' size="small" onClick={() => {
+                                navigate('/MyReceiveNoteList')
+                            }}>{t('dashboard.recentReceiveNote')}</Button>
+                            <div style={{marginTop: 20}}></div>
+                            {receiveNoteList.length > 0 ?
+                                receiveNoteList.map((item, index) => (
+                                    <ReceiveNoteRowDashboard data={item} key={index}/>
+                                ))
+                                :
+                                <Box>
+                                    {t('dashboard.noReceiveNote')}
+                                </Box>
+
+                            }
+                        </Paper>
+                    </Box>
                 </div>
             </div>
-            {/*</Box>*/}
 
-            {/*recent notes*/}
-            <Box display='flex' justifyContent='center' sx={{padding: 1, marginTop: 2}}>
-                <Paper sx={{
-                    maxWidth: 720,
-                    width: '100%',
-                    padding: 1,
-                    background: theme.palette.background.default,
-                    textAlign: 'center',
-                    border: '1px solid',
-                    borderColor: theme.palette.primary.main
-                }}>
-                    <Button variant='contained' size="small" onClick={() => {
-                        navigate('/NoteList')
-                    }}>{t('dashboard.recentNotes')}</Button>
-                    <div style={{marginTop: 20}}></div>
-                    {noteList.length > 0 ?
-                        noteList.map((item, index) => (
-                            <NoteRowDashboard data={item} key={index}/>
-                        ))
-                        :
-                        <Box>
-                            {t('dashboard.noNotes')}
-                        </Box>
-
-                    }
-                </Paper>
-            </Box>
-
-            {/*Recently received notes*/}
-            <Box display='flex' justifyContent='center' sx={{padding: 1, marginTop: 2}}>
-                <Paper sx={{
-                    maxWidth: 720,
-                    width: '100%',
-                    padding: 1,
-                    background: theme.palette.background.default,
-                    textAlign: 'center',
-                    border: '1px solid',
-                    borderColor: theme.palette.primary.main
-                }}>
-                    <Button variant='contained' size="small" onClick={() => {
-                        navigate('/MyReceiveNoteList')
-                    }}>{t('dashboard.recentReceiveNote')}</Button>
-                    <div style={{marginTop: 20}}></div>
-                    {receiveNoteList.length > 0 ?
-                        receiveNoteList.map((item, index) => (
-                            <ReceiveNoteRowDashboard data={item} key={index}/>
-                        ))
-                        :
-                        <Box>
-                            {t('dashboard.noReceiveNote')}
-                        </Box>
-
-                    }
-                </Paper>
-            </Box>
             <Snackbar
                 open={showNotification}
                 autoHideDuration={3000}

@@ -88,7 +88,7 @@ const Home = () => {
                         });
                         navigate("/Dashboard1");
                     } else {
-                        navigate("/guest/LoginPage")
+                        navigate("/LoginPage")
                     }
                 });
             }

@@ -40,6 +40,7 @@ import NotePageModalTagRow from "../tag/NotePageModalTagRow";
 import CloseIcon from '@mui/icons-material/Close';
 import {loadRefresh} from "../../store/commonSlice";
 import {Pagination} from "@mui/lab";
+import Header2 from "../common/Header2";
 
 const NoteList = () => {
     const notePageIndex = useSelector(
@@ -123,13 +124,17 @@ const NoteList = () => {
     return (
         <div style={{padding: 10}}>
             <Header1/>
+
             <div style={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
                 <div style={{width: '100%', maxWidth: 1080}}>
-                    <Breadcrumbs sx={{marginTop: 8}}>
+                    <div style={{marginTop: 60}}>
+                        {/*<Header2/>*/}
+                    </div>
+                    <Breadcrumbs sx={{marginTop: 2}}>
                         <Button onClick={() => {
                             navigate('/Dashboard1')
                         }}>{t('nav.home')}</Button>

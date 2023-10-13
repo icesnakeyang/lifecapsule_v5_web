@@ -45,7 +45,12 @@
     "donate": "Donate",
     "signIn": "Sign in",
     "back": "Back",
-    "inbox": "Inbox"
+    "inbox": "Inbox",
+    "privateDiary": "Private Diary",
+    "lastWords": "Last Words",
+    "loveLetter": "Love Letters",
+    "toFuture": "To Future",
+    "Inspiration": "Inspiration"
   },
   "login": {
     "tabEmail": "Email",
@@ -592,7 +597,8 @@
     "btSave": "Save project",
     "tipSaveSuccess": "Save project success!",
     "projectNameHolder": "Please input project name here",
-    "currentProject": "Project"
+    "currentProject": "Project",
+    "noProject": "Project can category your task, try create one"
   },
   "syserr": {
     "10001": "System or network error",

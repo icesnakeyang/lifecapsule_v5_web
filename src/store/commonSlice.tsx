@@ -4,6 +4,9 @@ import {Theme} from "@mui/material";
 type Action1 = {
     payload: string
 }
+type Action2 = {
+    payload: boolean
+}
 export const commonSlice = createSlice({
     name: "common",
     initialState: {
@@ -36,7 +39,7 @@ export const commonSlice = createSlice({
         saveLanguage: (state: any, action: Action1) => {
             state.language = action.payload
         },
-        saveDoNotLoadToDoTask: (state: any, action: any) => {
+        saveDoNotLoadToDoTask: (state: any, action: Action2) => {
             state.doNotLoadTodoTask = action.payload
         },
         saveThemeMode: (state: any, action: Action1) => {

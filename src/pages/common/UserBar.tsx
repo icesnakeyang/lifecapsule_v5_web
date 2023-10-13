@@ -29,7 +29,7 @@ const UserBar = () => {
                     fontSize: 20,
                     color: theme.main,
                 }}>
-                    <Hidden mdDown>
+                    <Hidden smDown>
                         <span style={{fontSize:16}}>
                        {nickname ? nickname : t('common.guest')}
                         </span>

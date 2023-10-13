@@ -35,7 +35,7 @@ const Language = () => {
                     color: theme.palette.primary.main,
                     fontSize: 24
                 }}>
-                <Hidden mdDown>
+                <Hidden smDown>
                     <span style={{fontSize:16}}>
                 {language}
                     </span>

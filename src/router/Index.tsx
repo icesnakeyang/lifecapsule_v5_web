@@ -22,6 +22,10 @@ import UserPrivacy from "../pages/UserPrivacy";
 import NoteSendList from "../pages/send/NoteSendList";
 import MySendNoteDetail from "../pages/send/MySendNoteDetail";
 import MyTriggerEdit from "../pages/send/MyTriggerEdit";
+import TodoPage from "../pages/task/todo/TodoPage";
+import ProjectList from "../pages/task/project/ProjectList";
+import ProjectEdit from "../pages/task/project/ProjectEdit";
+import TodoEdit from "../pages/task/todo/TodoEdit";
 
 const Routers = (data: any) => {
     const navigate = useNavigate()
@@ -65,6 +69,10 @@ const Routers = (data: any) => {
             <Route path='/NoteSendList' element={<NoteSendList/>}/>
             <Route path='/MySendNoteDetail' element={<MySendNoteDetail/>}/>
             <Route path='/MyTriggerEdit' element={<MyTriggerEdit/>}/>
+            <Route path='/TodoPage' element={<TodoPage/>}/>
+            <Route path='/ProjectList' element={<ProjectList/>}/>
+            <Route path='/ProjectEdit' element={<ProjectEdit/>}/>
+            <Route path='/TodoEdit' element={<TodoEdit/>}/>
         </Routes>
     )
 }

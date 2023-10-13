@@ -24,7 +24,7 @@ const DonateBar = () => {
                 fontSize: 20,
                 color: theme.main,
             }}>
-                <Hidden mdDown>
+                <Hidden smDown>
                     <span style={{fontSize:16}}>
                     {t('nav.donate')}
                         </span>
