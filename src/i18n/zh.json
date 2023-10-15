@@ -50,7 +50,8 @@
     "lastWords": "遗言",
     "loveLetter": "情书",
     "toFuture": "给未来的信",
-    "Inspiration": "灵感启发"
+    "Inspiration": "灵感启发",
+    "myHistory": "找回记忆"
   },
   "login": {
     "tabEmail": "Email",
@@ -574,6 +575,22 @@
     "currentProject": "当前项目",
     "noProject": "你还没有创建项目"
   },
+  "history": {
+    "title": "我的历史笔记",
+    "searchLabel": "搜索",
+    "searchHolder": "输入标题关键字",
+    "noTitle": "请输入回复内容的标题",
+    "noContent": "请输入回复内容",
+    "tipReplySuccess": "已回复成功",
+    "replyTitle": "回复标题",
+    "replyContent": "回复内容",
+    "reply": "回复",
+    "btReply": "回复",
+    "historyReply": "回复记录",
+    "pNote": "父笔记",
+    "pNoteTitle": "标题",
+    "pNoteCreateTime": "创建时间"
+  },
   "syserr": {
     "10001": "系统错误",
     "10002": "没有查询到用户信息，或者用户登录已过期",
@@ -587,7 +604,6 @@
     "10039": "没有查询到该笔记",
     "10045": "email未认证成功",
     "10046": "您已经绑定过email了，若要更换，请退出后再绑定",
-    "10047": "没有查询到用户信息",
     "10050": "该Email已经添加到接收人了",
     "10053": "该Email还没有注册",
     "10063": "Email验证失败",

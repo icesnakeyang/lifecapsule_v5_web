@@ -24,6 +24,7 @@ import {saveNoteList} from "../../store/noteDataSlice";
 import NoteRowDashboard from "./NoteRowDashboard";
 import ReceiveNoteRowDashboard from "./ReceiveNoteRowDashboard";
 import Header2 from "../common/Header2";
+import Footer1 from "../common/Footer1";
 
 const Dashboard1 = () => {
     const {t} = useTranslation()
@@ -91,6 +92,10 @@ const Dashboard1 = () => {
                 if (res.code === 0) {
                     // dispatch(saveNoteList(res.data.noteList));
                     setNoteList(res.data.noteList)
+                }else{
+                    if(res.code===10003){
+                        navigate('/LoginPage')
+                    }
                 }
             })
 
@@ -109,7 +114,7 @@ const Dashboard1 = () => {
             <Header1/>
 
             <div style={{display: 'flex', justifyContent: 'center', marginTop: 60}}>
-                <div style={{ width: '100%', maxWidth: 1080}}>
+                <div style={{width: '100%', maxWidth: 1080}}>
                     <Header2/>
                     {/*timer*/}
                     <div style={{display: 'flex', justifyContent: "center"}}>
@@ -215,6 +220,8 @@ const Dashboard1 = () => {
                     </Box>
                 </div>
             </div>
+
+            <div style={{height: 100}}></div>
 
             <Snackbar
                 open={showNotification}

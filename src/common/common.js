@@ -1,5 +1,4 @@
 export function timeLeft(triggerTimeSpan) {
-    console.log(triggerTimeSpan)
     if(!triggerTimeSpan){
         return {
             days:0,

@@ -46,7 +46,7 @@ const NoteRowDashboard = (data: any) => {
                     >
                         <span style={{
                             color: theme.palette.primary.main,
-                            textAlign: 'left'
+                            fontSize:16
                         }}>
                         {row.title}
                             </span>

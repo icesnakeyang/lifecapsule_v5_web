@@ -26,6 +26,10 @@ import TodoPage from "../pages/task/todo/TodoPage";
 import ProjectList from "../pages/task/project/ProjectList";
 import ProjectEdit from "../pages/task/project/ProjectEdit";
 import TodoEdit from "../pages/task/todo/TodoEdit";
+import MyHistoryHome from "../pages/myHistory/MyHistoryHome";
+import HistoryNoteDetail from "../pages/myHistory/HistoryNoteDetail";
+import LoveLetterList from "../pages/note/loveLetter/LoveLetterList";
+import LoveLetterEdit from "../pages/note/loveLetter/LoveLetterEdit";
 
 const Routers = (data: any) => {
     const navigate = useNavigate()
@@ -73,6 +77,10 @@ const Routers = (data: any) => {
             <Route path='/ProjectList' element={<ProjectList/>}/>
             <Route path='/ProjectEdit' element={<ProjectEdit/>}/>
             <Route path='/TodoEdit' element={<TodoEdit/>}/>
+            <Route path='/MyHistoryHome' element={<MyHistoryHome/>}/>
+            <Route path='/HistoryNoteDetail' element={<HistoryNoteDetail/>}/>
+            <Route path='/LoveLetterList' element={<LoveLetterList/>}/>
+            <Route path='/LoveLetterEdit' element={<LoveLetterEdit/>}/>
         </Routes>
     )
 }

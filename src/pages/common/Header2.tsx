@@ -10,14 +10,14 @@ import AirlineSeatIndividualSuiteIcon from '@mui/icons-material/AirlineSeatIndiv
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ScheduleSendIcon from '@mui/icons-material/ScheduleSend';
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
-
+import TheatersIcon from '@mui/icons-material/Theaters';
 const Header2 = () => {
     const navigate = useNavigate()
     const {t} = useTranslation()
     const theme = useTheme()
     return (
         <Grid container rowSpacing={1} columnSpacing={1} style={{
-            display: 'flex', justifyContent: 'center'
+            // display: 'flex', justifyContent: 'center'
         }}>
             {/*myNote*/}
             <Hidden mdUp>
@@ -48,6 +48,7 @@ const Header2 = () => {
                     </div>
                 </Grid>
             </Hidden>
+
             {/*myInbox*/}
             <Hidden mdUp>
                 <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
@@ -76,6 +77,7 @@ const Header2 = () => {
                     </div>
                 </Grid>
             </Hidden>
+
             {/*todolist*/}
             <Hidden mdUp>
                 <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
@@ -103,6 +105,8 @@ const Header2 = () => {
                     </div>
                 </Grid>
             </Hidden>
+
+            {/*private note*/}
             <Hidden mdUp>
                 <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
@@ -129,6 +133,8 @@ const Header2 = () => {
                     </div>
                 </Grid>
             </Hidden>
+
+            {/*last words*/}
             <Hidden mdUp>
                 <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
@@ -155,10 +161,12 @@ const Header2 = () => {
                     </div>
                 </Grid>
             </Hidden>
+
+            {/*love letter*/}
             <Hidden mdUp>
                 <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
-                        navigate('/NoteList')
+                        navigate('/LoveLetterList')
                     }}>
                         <FavoriteIcon fontSize='large' color='primary'/>
                     </IconButton>
@@ -173,7 +181,7 @@ const Header2 = () => {
                         flexDirection: "column"
                     }}>
                         <IconButton onClick={() => {
-                            navigate('/NoteList')
+                            navigate('/LoveLetterList')
                         }}>
                             <FavoriteIcon color='primary' fontSize='large'/>
                         </IconButton>
@@ -182,6 +190,7 @@ const Header2 = () => {
                 </Grid>
             </Hidden>
 
+            {/*to future*/}
             <Hidden mdUp>
                 <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
@@ -208,6 +217,8 @@ const Header2 = () => {
                     </div>
                 </Grid>
             </Hidden>
+
+            {/*inpiration*/}
             <Hidden mdUp>
                 <Grid item xs={3} sm={3}
                       style={{display: 'flex', justifyContent: 'center'}}>
@@ -232,6 +243,35 @@ const Header2 = () => {
                             <PsychologyAltIcon color='primary' fontSize='large'/>
                         </IconButton>
                         <div style={{color: theme.palette.primary.main, fontSize: 14}}>{t('nav.Inspiration')}</div>
+                    </div>
+                </Grid>
+            </Hidden>
+
+            {/*my memory*/}
+            <Hidden mdUp>
+                <Grid item xs={3} sm={3}
+                      style={{display: 'flex', justifyContent: 'center'}}>
+                    <IconButton onClick={() => {
+                        navigate('/MyHistoryHome')
+                    }}>
+                        <PsychologyAltIcon fontSize='large' color='primary'/>
+                    </IconButton>
+                </Grid>
+            </Hidden>
+            <Hidden mdDown>
+                <Grid item md={3} lg={1} xl={1}>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: "column"
+                    }}>
+                        <IconButton onClick={() => {
+                            navigate('/MyHistoryHome')
+                        }}>
+                            <TheatersIcon color='primary' fontSize='large'/>
+                        </IconButton>
+                        <div style={{color: theme.palette.primary.main, fontSize: 14}}>{t('nav.myHistory')}</div>
                     </div>
                 </Grid>
             </Hidden>

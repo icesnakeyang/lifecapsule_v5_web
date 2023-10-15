@@ -50,7 +50,8 @@
     "lastWords": "Last Words",
     "loveLetter": "Love Letters",
     "toFuture": "To Future",
-    "Inspiration": "Inspiration"
+    "Inspiration": "Inspiration",
+    "myHistory": "My History"
   },
   "login": {
     "tabEmail": "Email",
@@ -600,10 +601,36 @@
     "currentProject": "Project",
     "noProject": "Project can category your task, try create one"
   },
+  "history": {
+    "title": "My History",
+    "searchLabel": "Search",
+    "searchHolder": "Input title keywords",
+    "noTitle": "Please input comment title",
+    "noContent": "Please input comment",
+    "tipReplySuccess": "Reply success",
+    "replyTitle": "Reply title",
+    "replyContent": "Reply content",
+    "reply": "Reply",
+    "btReply": "Reply",
+    "historyReply": "History Reply",
+    "pNote": "Parent Note",
+    "pNoteTitle": "Parent note title",
+    "pNoteCreateTime": "Create time",
+    "noteInfo": "Note information"
+  },
+  "loveLetter": {
+    "title": "My Love Letters",
+    "btNewLoveLetter": "Create",
+    "editLoveLetter": "Edit Love Letter",
+    "tip4": "No one could get your love so far, write to him/her now",
+    "letterTitle": "Letter Title",
+    "letterContent": "Letter Content",
+    "createTime": "Create time"
+  },
   "syserr": {
     "10001": "System or network error",
     "10002": "Please login and try it again",
-    "10003": "You have to login first",
+    "10003": "Please sign in first",
     "10005": "Login name or password error",
     "10006": "This login name has been registerd already",
     "10017": "We didn't find this trigger",
@@ -613,7 +640,6 @@
     "10039": "Cannot find the note",
     "10045": "Email verify code error",
     "10046": "You have bound email already, please sign out first",
-    "10047": "No such user, please sign in again",
     "10050": "This email has been set to recipient already",
     "10053": "Email have not been registered",
     "10063": "Email verify failed!",

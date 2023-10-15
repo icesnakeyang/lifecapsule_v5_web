@@ -370,3 +370,21 @@ export const apiGetMyProfile = () => {
 export const apiReplyReceiveNote = (params:any) => {
     return Post(`${host}/web/noteReceive/replyReceiveNote`, params);
 };
+export const apiLoadHistoryHome = (params:any) => {
+    return Post(`${host}/web/history/loadHistoryHome`, params);
+};
+export const apiReplyMyNote = (params:any) => {
+    return Post(`${host}/web/history/replyMyNote`, params);
+};
+export const apiListSubNoteList = (params:any) => {
+    return Post(`${host}/web/history/listSubNoteList`, params);
+};
+export const apiGetMyPNote = (params:any) => {
+    return Post(`${host}/web/history/getMyPNote`, params);
+};
+export const apiListLoveLetter = (params:any) => {
+    return Post(`${host}/web/note/listLoveLetter`, params);
+};
+export const apiGetLoveLetter = (params:any) => {
+    return Post(`${host}/web/note/getLoveLetter`, params);
+};

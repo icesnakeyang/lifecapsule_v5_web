@@ -49,7 +49,7 @@ export const noteDataSlice = createSlice({
         saveNoteListTags: (state: any, action: any) => {
             state.noteListTags = action.payload
         },
-        saveNoteId: (state: any, action: any) => {
+        saveNoteId: (state: any, action: Action1) => {
             state.noteId = action.payload
         },
         saveNoteListSearchKey: (state: any, action: Action1) => {

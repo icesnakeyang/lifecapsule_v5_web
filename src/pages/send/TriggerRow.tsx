@@ -11,11 +11,17 @@ const TriggerRow = (data: any) => {
     const navigate = useNavigate()
     const theme = useTheme()
     return (
-        <Card style={{marginTop: 10, background: theme.palette.background.default}}>
+        <Card style={{
+            padding: 0,
+            marginTop: 10,
+            background: theme.palette.background.default,
+            border: '1px solid',
+            borderColor: theme.palette.primary.main
+        }}>
             <CardHeader
                 style={{padding: 0}}
                 title={
-                    <Button style={{fontSize: 18}} onClick={() => {
+                    <Button size='small' style={{fontSize:16}} onClick={() => {
                         navigate('/MyTriggerEdit', {state: {triggerId: item.triggerId}})
                     }}>
                         {item.title}

@@ -103,12 +103,21 @@ const NoteEdit = () => {
                         }
                         dispatch(saveTagList(res.data.noteTagList))
                         dispatch(saveEditTags(res.data.noteTagList))
+                    } else {
+                        setMsg(t('syserr.' + res.code))
+                        setMsgType('error')
+                        setShowMsg(true)
+                        if (res.code === 10047) {
+                            navigate('/LoginPage')
+                        }
                     }
-                });
+                }).catch(() => {
+                    setMsg(t('syserr.10001'))
+                    setMsgType('error')
+                    setShowMsg(true)
+                })
             }
-        });
-
-
+        })
     };
 
     const onSaveNote = () => {
@@ -254,15 +263,19 @@ const NoteEdit = () => {
     }
 
     return (
-        <Box sx={{padding: 0}}>
+        <div style={{padding: 0}}>
             <Header1/>
-            <Container>
-                <Breadcrumbs sx={{marginTop: 8}}>
+            <div style={{display: 'flex', justifyContent: 'center', padding: 10}}>
+                <div style={{width:'100%', maxWidth:1080}}>
+                <Breadcrumbs style={{marginTop: 60}}>
                     <Button onClick={() => {
                         navigate('/Dashboard1')
                     }}>
                         {t("common.home")}
                     </Button>
+                    <Button onClick={()=>{
+                        navigate('/NoteList')
+                    }}>{t('MyNotes.noteList')}</Button>
                     <Button onClick={() => {
                         navigate(-1)
                     }}>
@@ -431,8 +444,8 @@ const NoteEdit = () => {
                         </div>
                     </Box>
                 </Box>
-
-            </Container>
+                </div>
+            </div>
 
             <Dialog
                 open={modalDelete}
@@ -492,7 +505,7 @@ const NoteEdit = () => {
             >
                 <Alert variant={"filled"} severity={msgType}>{msg}</Alert>
             </Snackbar>
-        </Box>
+        </div>
     )
 }
 export default NoteEdit;

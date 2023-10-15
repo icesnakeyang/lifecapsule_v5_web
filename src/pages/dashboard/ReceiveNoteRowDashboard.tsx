@@ -58,7 +58,7 @@ const ReceiveNoteRowDashboard = (data: any) => {
 
                             <span style={{
                                 color: theme.palette.primary.main,
-                                textAlign: 'left'
+                                fontSize:16
                             }}>{row.title}</span>
                         </div>
                     </Button>

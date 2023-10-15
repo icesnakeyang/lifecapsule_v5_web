@@ -41,6 +41,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import {loadRefresh} from "../../store/commonSlice";
 import {Pagination} from "@mui/lab";
 import Header2 from "../common/Header2";
+import Footer1 from "../common/Footer1";
 
 const NoteList = () => {
     const notePageIndex = useSelector(
@@ -70,6 +71,7 @@ const NoteList = () => {
 
     useEffect(() => {
         loadBaseData()
+        dispatch(saveNotePageIndex(1))
     }, [])
 
     useEffect(() => {
@@ -89,7 +91,13 @@ const NoteList = () => {
                 if (res.code === 0) {
                     dispatch(saveNoteList(res.data.noteList));
                     setTotalNote(res.data.totalNote);
+                    console.log(res.data.totalNote)
+                    console.log(notePageSize)
+
                     const totalPages = Math.ceil(res.data.totalNote / notePageSize);
+
+                    console.log(totalPages)
+
                     setNotePages(totalPages)
                     setLoading(false);
                 } else {
@@ -122,13 +130,13 @@ const NoteList = () => {
     }
 
     return (
-        <div style={{padding: 10}}>
+        <div>
             <Header1/>
-
             <div style={{
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                padding: 10
             }}>
                 <div style={{width: '100%', maxWidth: 1080}}>
                     <div style={{marginTop: 60}}>
@@ -233,6 +241,7 @@ const NoteList = () => {
                     }
                 </div>
             </div>
+
             <Snackbar open={showMsg}
                       autoHideDuration={3000}
                       onClose={() => {
