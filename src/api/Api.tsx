@@ -388,3 +388,9 @@ export const apiListLoveLetter = (params:any) => {
 export const apiGetLoveLetter = (params:any) => {
     return Post(`${host}/web/note/getLoveLetter`, params);
 };
+export const apiSaveLoveLetter = (params:any) => {
+    return Post(`${host}/web/note/saveLoveLetter`, params);
+};
+export const apiDeleteMyLoveLetter = (params:any) => {
+    return Post(`${host}/web/note/deleteMyLoveLetter`, params);
+};

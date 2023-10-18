@@ -495,7 +495,8 @@
     "createTime": "任务创建时间",
     "priority": "任务优先级",
     "taskStatus": "当前状态",
-    "hideComplete": "隐藏已完成任务"
+    "hideComplete": "隐藏已完成任务",
+    "tipNoTitle": "请输入任务标题"
   },
   "setting": {
     "btSelect": "选择",
@@ -590,6 +591,15 @@
     "pNote": "父笔记",
     "pNoteTitle": "标题",
     "pNoteCreateTime": "创建时间"
+  },
+  "loveLetter": {
+    "title": "情书",
+    "btNewLoveLetter": "新建",
+    "editLoveLetter": "编辑情书",
+    "tip4": "你还没有创建情书，现在就写给他/她吧",
+    "letterTitle": "标题",
+    "letterContent": "内容",
+    "createTime": "创建时间"
   },
   "syserr": {
     "10001": "系统错误",

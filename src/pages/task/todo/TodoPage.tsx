@@ -41,11 +41,12 @@ const TodoPage = () => {
     const [msgType, setMsgType] = useState<AlertColor>()
     const [showMsg, setShowMsg] = useState(false)
     const theme = useTheme()
+    const refresh = useSelector((state: any) => state.commonSlice.refresh)
     useEffect(() => {
         loadAllData();
         return () => {
         };
-    }, [pageIndex, pageSize, hideComplete, currentProjectId]);
+    }, [pageIndex, pageSize, hideComplete, currentProjectId, refresh]);
 
     useEffect(() => {
         // if (doNotLoadTodoTask) {
@@ -115,7 +116,7 @@ const TodoPage = () => {
                                 <Button
                                     variant='contained'
                                     onClick={() => {
-                                        navigate("/main/TodoNew");
+                                        navigate("/TodoNew");
                                     }}
                                 >
                                     {t("task.btAddTodo")}

@@ -4,22 +4,15 @@ import {
     Breadcrumbs,
     Button, CircularProgress,
     Container,
-    Dialog, DialogActions,
-    DialogContent,
-    DialogContentText, Snackbar,
+    Snackbar,
     Stack,
     Switch,
     TextField
 } from "@mui/material";
 import Header1 from "../common/Header1";
-import SendIcon from "@mui/icons-material/Send";
-import {SendNoteModel} from "../../model/SendNoteModel";
-import {saveSendNote} from "../../store/noteSendSlice";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import NoteEditTagRow from "../tag/NoteEditTagRow";
-import moment from "moment/moment";
 import InfoIcon from "@mui/icons-material/Info";
-import {apiDeleteMyNote, apiRequestRsaPublicKey, apiSaveMyNote} from "../../api/Api";
+import {apiRequestRsaPublicKey, apiSaveMyNote} from "../../api/Api";
 import TagEditModal from "../tag/TagEditModal";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";

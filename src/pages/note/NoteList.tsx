@@ -69,10 +69,10 @@ const NoteList = () => {
     const [searchKey, setSearchKey] = useState('')
     const [notePages, setNotePages] = useState(1)
 
-    useEffect(() => {
-        loadBaseData()
-        dispatch(saveNotePageIndex(1))
-    }, [])
+    // useEffect(() => {
+    //     loadBaseData()
+    //     dispatch(saveNotePageIndex(1))
+    // }, [])
 
     useEffect(() => {
         listMyNote()

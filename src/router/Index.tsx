@@ -30,6 +30,8 @@ import MyHistoryHome from "../pages/myHistory/MyHistoryHome";
 import HistoryNoteDetail from "../pages/myHistory/HistoryNoteDetail";
 import LoveLetterList from "../pages/note/loveLetter/LoveLetterList";
 import LoveLetterEdit from "../pages/note/loveLetter/LoveLetterEdit";
+import LoveLetterNew from "../pages/note/loveLetter/LoveLetterNew";
+import TodoNew from "../pages/task/todo/TodoNew";
 
 const Routers = (data: any) => {
     const navigate = useNavigate()
@@ -81,6 +83,8 @@ const Routers = (data: any) => {
             <Route path='/HistoryNoteDetail' element={<HistoryNoteDetail/>}/>
             <Route path='/LoveLetterList' element={<LoveLetterList/>}/>
             <Route path='/LoveLetterEdit' element={<LoveLetterEdit/>}/>
+            <Route path='/LoveLetterNew' element={<LoveLetterNew/>}/>
+            <Route path='/TodoNew' element={<TodoNew/>}/>
         </Routes>
     )
 }

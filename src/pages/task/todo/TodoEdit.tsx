@@ -141,7 +141,7 @@ const TodoEdit = () => {
                                     setShowMsg(true)
                                     setTimeout(() => {
                                         navigate(-1);
-                                    }, 2000)
+                                    }, 1000)
                                 } else {
                                     setMsg(t("syserr." + res.code))
                                     setMsgType('error')

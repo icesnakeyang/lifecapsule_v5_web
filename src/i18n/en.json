@@ -509,7 +509,8 @@
     "createTime": "Create time",
     "priority": "Priority",
     "taskStatus": "Current status",
-    "hideComplete": "Hide complete"
+    "hideComplete": "Hide complete",
+    "tipNoTitle": "Please input task title"
   },
   "setting": {
     "btSelect": "Select",
