@@ -1,7 +1,6 @@
 import {Chip, Grid} from "@mui/material";
 
 const HotTagRow = (data: any) => {
-    console.log(data)
     const {item} = data
     const onSelectTag = () => {
         data.onSelectTag(item)

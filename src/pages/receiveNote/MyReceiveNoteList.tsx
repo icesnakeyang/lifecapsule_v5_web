@@ -95,7 +95,6 @@ const MyReceiveNoteList = () => {
                                     ))}
                                     <Pagination style={{marginTop: 10}} count={totalPage}
                                                 onChange={(e, page) => {
-                                                    console.log(page)
                                                     dispatch(saveReceivePageIndex(page))
                                                     {/*        dispatch(saveReceivePageSize(pz));*/
                                                     }

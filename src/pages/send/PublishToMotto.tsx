@@ -82,7 +82,6 @@ const PublishToMotto = () => {
                             }}> {t('MyNotes.SendPage.PublishToMotto.tipPublishToMotto')}</div>
                             {showTip1 ?
                                 <IconButton onClick={() => {
-                                    console.log('close tip')
                                     setShowTip1(false);
                                 }}>
                                     <ArrowDropUpIcon/>

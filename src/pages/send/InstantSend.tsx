@@ -59,7 +59,6 @@ const InstantSend = () => {
         setTitle(sendNoteTitle)
         setFromName(nickname)
         loadAllData()
-        console.log(sendNoteContent)
     }, [])
 
     const loadAllData = () => {
@@ -153,7 +152,6 @@ const InstantSend = () => {
                 apiCreateTriggerInstant(params)
                     .then((res2: any) => {
                         if (res2.code === 0) {
-                            console.log('发送成功')
                             setMsg(t('MyNotes.SendPage.InstantSend.tipSendSuccess'))
                             setMsgType('success')
                             setShowMsg(true)
@@ -235,7 +233,6 @@ const InstantSend = () => {
                                 </span>
                         {showTip1 ?
                             <IconButton onClick={() => {
-                                console.log('close tip')
                                 setShowTip1(false);
                             }}>
                                 <ArrowDropUpIcon/>

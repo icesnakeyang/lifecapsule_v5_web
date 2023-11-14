@@ -21,7 +21,7 @@ const Header2 = () => {
         }}>
             {/*myNote*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3}
+                <Grid item xs={2} sm={2}
                       style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/NoteList')
@@ -51,7 +51,7 @@ const Header2 = () => {
 
             {/*myInbox*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
+                <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/MyReceiveNoteList')
                     }}>
@@ -80,7 +80,7 @@ const Header2 = () => {
 
             {/*todolist*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
+                <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/TodoPage')
                     }}>
@@ -108,7 +108,7 @@ const Header2 = () => {
 
             {/*private note*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
+                <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/NoteList')
                     }}>
@@ -136,7 +136,7 @@ const Header2 = () => {
 
             {/*last words*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
+                <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/NoteList')
                     }}>
@@ -164,9 +164,9 @@ const Header2 = () => {
 
             {/*love letter*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
+                <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
-                        navigate('/LoveLetterList')
+                        navigate('/LoveLetterNew')
                     }}>
                         <FavoriteIcon fontSize='large' color='primary'/>
                     </IconButton>
@@ -181,7 +181,7 @@ const Header2 = () => {
                         flexDirection: "column"
                     }}>
                         <IconButton onClick={() => {
-                            navigate('/LoveLetterList')
+                            navigate('/LoveLetterNew')
                         }}>
                             <FavoriteIcon color='primary' fontSize='large'/>
                         </IconButton>
@@ -192,7 +192,7 @@ const Header2 = () => {
 
             {/*to future*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3} style={{display: 'flex', justifyContent: 'center'}}>
+                <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/NoteList')
                     }}>
@@ -220,7 +220,7 @@ const Header2 = () => {
 
             {/*inpiration*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3}
+                <Grid item xs={2} sm={2}
                       style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/NoteList')
@@ -249,7 +249,7 @@ const Header2 = () => {
 
             {/*my memory*/}
             <Hidden mdUp>
-                <Grid item xs={3} sm={3}
+                <Grid item xs={2} sm={2}
                       style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
                         navigate('/MyHistoryHome')

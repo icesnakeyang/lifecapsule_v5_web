@@ -2,6 +2,7 @@
   "common": {
     "appTitle": "LifeCapsule",
     "btSave": "Save",
+    "btSubmit": "Submit",
     "btSaving": "Saving",
     "home": "Home",
     "btDelete": "Delete",
@@ -472,7 +473,8 @@
     "editRecipientMessage": "Edit recipient receive message",
     "recipientMessagePreview": "Preview of recipient",
     "recentRecipient": "Recent recipient",
-    "tipNoEmail": "Please input email what you want to send"
+    "tipNoEmail": "Please input email what you want to send",
+    "setRecipient": "Set Recipient"
   },
   "task": {
     "task": "Task",
@@ -624,9 +626,42 @@
     "btNewLoveLetter": "Create",
     "editLoveLetter": "Edit Love Letter",
     "tip4": "No one could get your love so far, write to him/her now",
-    "letterTitle": "Letter Title",
     "letterContent": "Letter Content",
-    "createTime": "Create time"
+    "createTime": "Create time",
+    "loveLetterTitle": "Title",
+    "loveLetterTitleHolder": "Input the title of your letter",
+    "tipTrigger": "Set send trigger",
+    "toName": "To name",
+    "tipFromName": "Your name will be displayed in the email sent to the recipient",
+    "triggerCondition": "Send condition",
+    "sendTime": "Send time",
+    "contentHolder": "Write your words here",
+    "tipLoveLetterTitle": "This title will be displayed as subject of the mail sent to the recipient",
+    "tipTrigger1": "Set trigger condition and recipient, when the condition triggered, this letter will be sent to the recipient",
+    "tipTrigger2": "It will not be sent if you leave this condition empty",
+    "to": "Email to",
+    "tipToName": "The recipient will see this name what you call him/her in the email",
+    "fromName": "From name",
+    "tipNoTitle": "Please input title",
+    "tipNoContent": "Please input content",
+    "tipSaveLoveLetterSuccess": "Submit your love letter success",
+    "btAddTrigger": "Add trigger",
+    "trigger": {
+      "title": "Love letter trigger",
+      "to": "To",
+      "toEmail": "To Email",
+      "triggerType": "Send method",
+      "emailComplete": "Email Sent",
+      "messageComplete": "Message Sent",
+      "emailNotSent": "Email Not Sent",
+      "messageNotSent": "Message Not Sent",
+      "fromName": "From name",
+      "sendStatus": "Send status",
+      "TIMER_TYPE_PRIMARY": "Send when your primary countdown to 0",
+      "TIMER_TYPE_DATETIME": "Send by specific time",
+      "unSet": "Wait",
+      "tipUnset": "It won't send until you set this trigger condition"
+    }
   },
   "syserr": {
     "10001": "System or network error",

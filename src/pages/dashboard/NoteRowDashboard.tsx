@@ -38,7 +38,6 @@ const NoteRowDashboard = (data: any) => {
                 }}>
                     <Button
                         onClick={() => {
-                        console.log(row.noteId)
                         dispatch(saveNoteId(row.noteId))
                         navigate('/NoteEdit')
                     }}

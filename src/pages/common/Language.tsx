@@ -13,7 +13,6 @@ const Language = () => {
     const theme = useTheme()
     const dispatch = useDispatch()
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        console.log(event.currentTarget)
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
@@ -52,13 +51,11 @@ const Language = () => {
                 }}
             >
                 <MenuItem onClick={() => {
-                    console.log('change to english')
                     i18n.changeLanguage('en')
                     dispatch(saveLanguage('en'))
                     setAnchorEl(null);
                 }}>English</MenuItem>
                 <MenuItem onClick={() => {
-                    console.log('设置为中文')
                     i18n.changeLanguage('zh')
                     dispatch(saveLanguage('zh'))
                     setAnchorEl(null);

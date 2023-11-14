@@ -79,7 +79,7 @@ const TodoPage = () => {
                     setShowMsg(true)
                     setTimeout(() => {
                         if (res.code === 10047) {
-                            navigate("/guest/LoginPage");
+                            navigate("/LoginPage");
                         }
                     }, 1000)
                 }
@@ -126,7 +126,6 @@ const TodoPage = () => {
                                   style={{display: "flex", alignItems: "center"}}>
                                 <FormGroup>
                                     <FormControlLabel control={<Checkbox checked={hideComplete} onChange={() => {
-                                        console.log(hideComplete)
                                         setHideComplete(!hideComplete)
                                         // setHideComplete(e.target.value);
                                     }}/>} label={t("task.hideComplete")}/>
@@ -181,7 +180,6 @@ const TodoPage = () => {
                       autoHideDuration={2000}
                       anchorOrigin={{vertical: "top", horizontal: 'center'}}
                       onClose={() => {
-                          console.log('close')
                           setShowMsg(false)
                       }}
             >

@@ -383,14 +383,17 @@ export const apiGetMyPNote = (params:any) => {
     return Post(`${host}/web/history/getMyPNote`, params);
 };
 export const apiListLoveLetter = (params:any) => {
-    return Post(`${host}/web/note/listLoveLetter`, params);
+    return Post(`${host}/web/note/love/listLoveLetter`, params);
 };
 export const apiGetLoveLetter = (params:any) => {
-    return Post(`${host}/web/note/getLoveLetter`, params);
+    return Post(`${host}/web/note/love/getLoveLetter`, params);
 };
 export const apiSaveLoveLetter = (params:any) => {
-    return Post(`${host}/web/note/saveLoveLetter`, params);
+    return Post(`${host}/web/note/love/saveLoveLetter`, params);
 };
 export const apiDeleteMyLoveLetter = (params:any) => {
-    return Post(`${host}/web/note/deleteMyLoveLetter`, params);
+    return Post(`${host}/web/note/love/deleteMyLoveLetter`, params);
+};
+export const apiGetLoveLetterTrigger = (params:any) => {
+    return Post(`${host}/web/note/love/getLoveLetterTrigger`, params);
 };

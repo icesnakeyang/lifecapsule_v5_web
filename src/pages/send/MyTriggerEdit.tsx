@@ -76,10 +76,7 @@ const MyTriggerEdit = () => {
                         }
                         setToName(trigger.toName)
                         setFromName(trigger.fromName)
-                        console.log(1)
                         if (trigger.triggerTime) {
-                            console.log(2)
-                            console.log(trigger.triggerTime)
 
                             let date1 = dayjs(trigger.triggerTime)
                             setTriggerTime(date1)
@@ -112,10 +109,8 @@ const MyTriggerEdit = () => {
     }
 
     const onEncodeContent = () => {
-        console.log('encode content')
         if (content) {
             try {
-                console.log('try encode')
                 const keyAES = CryptoJS.SHA256(encodeCode);
                 const keyAESBase64 = CryptoJS.enc.Base64.stringify(keyAES);
                 let content2 = Decrypt(content, keyAESBase64, keyAESBase64);
@@ -123,7 +118,6 @@ const MyTriggerEdit = () => {
                 // dispatch(saveDecrypted(true));
                 setContent(content2);
             } catch (err) {
-                console.log(err)
             }
         }
     }
@@ -142,7 +136,6 @@ const MyTriggerEdit = () => {
         let params = {
             triggerId
         }
-        console.log(params)
         apiDeleteMyNoteTrigger(params).then((res: any) => {
             if (res.code === 0) {
                 setMsg(t('MyNoteSend.MyTriggerEdit.tipCancelSuccess'))

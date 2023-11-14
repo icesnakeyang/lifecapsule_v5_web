@@ -58,7 +58,6 @@ const UsernameLogin = () => {
             loginName,
             password
         }
-        console.log(params)
         setSaving(true)
 
         apiSignByLoginName(params).then((res: any) => {
@@ -109,7 +108,6 @@ const UsernameLogin = () => {
                            error={loginNameErr}
                            helperText={tipErrLoginName}
                            onChange={e => {
-                               console.log(e.target.value)
                                setLoginName(e.target.value)
                            }}
 
@@ -119,7 +117,6 @@ const UsernameLogin = () => {
                            type='password'
                            helperText={tipPasswordErr}
                            onChange={e => {
-                               console.log(e.target.value)
                                setPassword(e.target.value)
                            }}
                 />

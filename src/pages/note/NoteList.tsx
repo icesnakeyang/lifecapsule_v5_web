@@ -69,13 +69,9 @@ const NoteList = () => {
     const [searchKey, setSearchKey] = useState('')
     const [notePages, setNotePages] = useState(1)
 
-    // useEffect(() => {
-    //     loadBaseData()
-    //     dispatch(saveNotePageIndex(1))
-    // }, [])
-
     useEffect(() => {
         listMyNote()
+        loadBaseData()
     }, [refresh, notePageIndex, notePageSize])
 
     const listMyNote = () => {
@@ -91,12 +87,8 @@ const NoteList = () => {
                 if (res.code === 0) {
                     dispatch(saveNoteList(res.data.noteList));
                     setTotalNote(res.data.totalNote);
-                    console.log(res.data.totalNote)
-                    console.log(notePageSize)
 
                     const totalPages = Math.ceil(res.data.totalNote / notePageSize);
-
-                    console.log(totalPages)
 
                     setNotePages(totalPages)
                     setLoading(false);
@@ -105,7 +97,7 @@ const NoteList = () => {
                     setMsgType('error')
                     setShowMsg(true)
                     if (res.code === 10003) {
-                        navigate("/guest/LoginPage");
+                        navigate("/LoginPage");
                     }
                 }
             })
@@ -187,7 +179,6 @@ const NoteList = () => {
                                                }}
                                     />
                                     <IconButton type="button" aria-label="search" onClick={() => {
-                                        console.log(noteListSearchKey)
                                         dispatch(saveNotePageIndex(1))
                                         dispatch(loadRefresh())
                                     }}>
@@ -252,8 +243,8 @@ const NoteList = () => {
                 <Alert severity={msgType} variant='filled'>{msg}</Alert>
             </Snackbar>
 
-            <Dialog open={modalTag}>
-                <DialogContent style={{padding: 20, minWidth: 300, background: theme.palette.background.default}}>
+            <Dialog open={modalTag} style={{}}>
+                <DialogContent style={{minWidth: 300, minHeight: 300, background: theme.palette.background.default}}>
                     <IconButton
                         aria-label="close"
                         onClick={() => {
@@ -268,12 +259,14 @@ const NoteList = () => {
                     >
                         <CloseIcon/>
                     </IconButton>
-                    <Grid container spacing={0.5} rowSpacing={0.5}>
-                        {myNoteTags && myNoteTags.length > 0 ?
-                            myNoteTags.map((item: any, index: any) => (
-                                <NotePageModalTagRow item={item} key={index} getFun={getFun}/>
-                            )) : null}
-                    </Grid>
+                    <div style={{marginTop:40}}>
+                        <Grid container spacing={0.5} rowSpacing={0.5}>
+                            {myNoteTags && myNoteTags.length > 0 ?
+                                myNoteTags.map((item: any, index: any) => (
+                                    <NotePageModalTagRow item={item} key={index} getFun={getFun}/>
+                                )) : null}
+                        </Grid>
+                    </div>
                 </DialogContent>
             </Dialog>
         </div>

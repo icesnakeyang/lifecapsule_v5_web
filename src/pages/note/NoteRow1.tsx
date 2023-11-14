@@ -15,9 +15,6 @@ const NoteRow1 = (data: any) => {
     return (
         <Paper sx={{marginTop: 1, maxWidth: 1080, background: theme.palette.background.default}}>
             <Button variant='outlined' sx={{width: '100%'}} onClick={() => {
-                console.log('go')
-                console.log(row.title)
-                console.log(row.noteId)
                 dispatch(saveNoteId(row.noteId))
                 navigate('/NoteEdit')
             }}>

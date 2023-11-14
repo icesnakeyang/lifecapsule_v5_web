@@ -15,7 +15,6 @@ export const tagSlice = createSlice({
     },
     reducers: {
         saveEditTags: (state: any, action: PayloadAction<TagModel[]>) => {
-            console.log(action)
             state.editTags = action.payload
         },
         saveHotTags: (state: any, action: PayloadAction<TagModel[]>) => {

@@ -210,7 +210,6 @@ const PrimarySend = () => {
                                 </span>
                             {showTip1 ?
                                 <IconButton onClick={() => {
-                                    console.log('close tip')
                                     setShowTip1(false);
                                 }}>
                                     <ArrowDropUpIcon/>

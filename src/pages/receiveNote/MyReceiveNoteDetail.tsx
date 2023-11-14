@@ -89,11 +89,9 @@ const MyReceiveNoteDetail = () => {
     };
 
     const onDecode = () => {
-        console.log(1)
         if (!decode) {
             return;
         }
-        console.log(2)
         if (sendLog && sendLog.content) {
             try {
                 setDecoding(true);
@@ -103,7 +101,6 @@ const MyReceiveNoteDetail = () => {
                 setNoteContent(content);
                 setDecoding(false);
             } catch (err) {
-                console.log(err)
             }
         }
     };
@@ -298,7 +295,6 @@ const MyReceiveNoteDetail = () => {
                       autoHideDuration={2000}
                       anchorOrigin={{vertical: "top", horizontal: 'center'}}
                       onClose={() => {
-                          console.log('close')
                           setShowMsg(false)
                       }}
             >

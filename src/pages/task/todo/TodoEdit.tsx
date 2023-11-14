@@ -42,7 +42,6 @@ const TodoEdit = () => {
         const theme = useTheme()
 
         useEffect(() => {
-            console.log(todoTaskId)
             if (todoTaskId) {
                 //修改
                 if (doNotLoadTodoTask) {
@@ -262,7 +261,6 @@ const TodoEdit = () => {
                           autoHideDuration={2000}
                           anchorOrigin={{vertical: "top", horizontal: 'center'}}
                           onClose={() => {
-                              console.log('close')
                               setShowMsg(false)
                           }}
                 >

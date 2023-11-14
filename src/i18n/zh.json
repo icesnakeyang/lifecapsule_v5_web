@@ -2,6 +2,7 @@
   "common": {
     "appTitle": "时空笔记",
     "btSave": "保存",
+    "btSubmit": "保存提交",
     "btSaving": "保存中...",
     "home": "首页",
     "btDelete": "删除",
@@ -458,7 +459,8 @@
     "editRecipientMessage": "编辑接收人接收到到的信息",
     "recipientMessagePreview": "接收人预览信息",
     "recentRecipient": "最近发送的接收人",
-    "tipNoEmail": "请输入你要发送的email邮箱"
+    "tipNoEmail": "请输入你要发送的email邮箱",
+    "setRecipient": "设置接收人"
   },
   "task": {
     "task": "我的任务",
@@ -597,9 +599,40 @@
     "btNewLoveLetter": "新建",
     "editLoveLetter": "编辑情书",
     "tip4": "你还没有创建情书，现在就写给他/她吧",
-    "letterTitle": "标题",
     "letterContent": "内容",
-    "createTime": "创建时间"
+    "createTime": "创建时间",
+    "tipTrigger": "设置发送触发器",
+    "loveLetterTitle": "标题",
+    "loveLetterTitleHolder": "给你的情书取一个标题吧",
+    "toName": "他/她的名字",
+    "tipFromName": "发送给接收人的邮件里显示的你的称呼",
+    "contentHolder": "写下你想对他/她说的话",
+    "tipLoveLetterTitle": "注意：此标题就是发送给对方的电子邮件的标题",
+    "tipTrigger1": "设置情书的发送条件和接收人，如果条件被触发，该情书会自动发送给他/她",
+    "tipTrigger2": "不设置则不会被发送",
+    "to": "发送到Email",
+    "tipToName": "发送给接收人的邮件里显示的你对他/她的称呼",
+    "fromName": "你的名字",
+    "tipNoTitle": "请输入标题",
+    "tipNoContent": "请写下情书内容",
+    "tipSaveLoveLetterSuccess": "提交情书成功",
+    "btAddTrigger": "添加发送条件",
+    "trigger": {
+      "title": "情书发送条件",
+      "to": "发送给",
+      "toEmail": "发送邮箱",
+      "triggerType": "发送方式",
+      "emailComplete": "邮件已发送",
+      "emailNotSent": "邮件未发送",
+      "messageComplete": "消息已发送",
+      "messageNotSent": "消息未发送",
+      "fromName": "发送人",
+      "sendStatus": "发送状态",
+      "TIMER_TYPE_PRIMARY": "当主倒计时结束时发送",
+      "TIMER_TYPE_DATETIME": "指定时间发送",
+      "unSet": "待定",
+      "tipUnset": "暂不发送"
+    }
   },
   "syserr": {
     "10001": "系统错误",

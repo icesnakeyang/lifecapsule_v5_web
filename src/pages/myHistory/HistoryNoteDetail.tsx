@@ -69,11 +69,8 @@ const HistoryNoteDetail = () => {
                         setCreateTime(note.createTime);
                         setTitle(note.title);
                         setCommentTitle('Re: ' + note.title)
-                        console.log(1)
                         if (note.content) {
-                            console.log(2)
                             if (note.encrypt === 1) {
-                                console.log(3)
                                 let strKey = note.userEncodeKey;
                                 strKey = Decrypt2(strKey, keyAES_1);
                                 let content = Decrypt(note.content, strKey, strKey);
@@ -341,7 +338,6 @@ const HistoryNoteDetail = () => {
                       autoHideDuration={2000}
                       anchorOrigin={{vertical: "top", horizontal: 'center'}}
                       onClose={() => {
-                          console.log('close')
                           setShowMsg(false)
                       }}
             >

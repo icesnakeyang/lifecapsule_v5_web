@@ -10,27 +10,29 @@ const SendContactRow = (data: any) => {
     const dispatch = useDispatch()
     const theme = useTheme()
     return (
-        <Card style={{marginTop: 5, background: theme.palette.primary.dark}}>
-            <CardHeader title={item.contactName}
-                        style={{color: theme.palette.primary.light}}
-                        action={
-                            <Button variant='contained' size='small' onClick={() => {
-                                let data = {
-                                    contactName: item.contactName,
-                                    email: item.email
-                                }
-                                dispatch(saveSendToName(item.contactName))
-                                dispatch(saveSendToEmail(item.email))
-                                onSelect(data)
-                                // 这里要调用父组件的onOk方法
-                            }}>{t('common.btSelect')}</Button>
-                        }
-            >
-            </CardHeader>
-            <CardContent>
-                <span style={{color: theme.palette.primary.contrastText}}>
-                {item.email}
-                    </span>
+        <Card style={{
+            marginTop: 5,
+            background: theme.palette.background.default,
+            border: '1px solid',
+            borderColor: theme.palette.primary.main
+        }}>
+            <CardContent style={{padding:10}}>
+                <Grid container rowSpacing={1} alignItems='center'>
+                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                        <Button onClick={()=>{
+                            let data = {
+                                contactName: item.contactName,
+                                email: item.email
+                            }
+                            dispatch(saveSendToName(item.contactName))
+                            dispatch(saveSendToEmail(item.email))
+                            onSelect(data)
+                        }}>{item.contactName}</Button>
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+                        {item.email}
+                    </Grid>
+                </Grid>
             </CardContent>
         </Card>
     )

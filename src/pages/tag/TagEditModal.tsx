@@ -82,7 +82,6 @@ const TagEditModal = ({visible, hideModal}: any) => {
         <Dialog
             open={visible}
             onClose={() => {
-                console.log('close tag edit modal')
                 onSaveTags()
                 hideModal()
             }}
@@ -132,7 +131,6 @@ const TagEditModal = ({visible, hideModal}: any) => {
                 </Box>
                 <DialogActions>
                     <Button onClick={() => {
-                        console.log('close tag edit modal')
                         onSaveTags()
                         hideModal()
                     }}>Close</Button>

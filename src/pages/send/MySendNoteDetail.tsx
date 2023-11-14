@@ -37,7 +37,6 @@ const MySendNoteDetail = () => {
     const theme = useTheme()
 
     useEffect(() => {
-        console.log(para)
         loadAllData();
     }, []);
 
@@ -97,7 +96,6 @@ const MySendNoteDetail = () => {
                 let content = Decrypt(sendLog.content, keyAESBase64, keyAESBase64);
                 setNoteContent(content);
             } catch (err) {
-                console.log(err)
             }
         }
     };

@@ -69,8 +69,6 @@ const DatetimeSend = () => {
     }, [])
 
     useEffect(() => {
-        console.log(sendTime)
-        console.log(sendTime?.format('YYYY-MM-DD HH:mm'))
     }, [sendTime])
 
     const loadAllData = () => {
@@ -228,7 +226,6 @@ const DatetimeSend = () => {
                         }}>{t('MyNotes.SendPage.DatetimeSend.tipSendByDatetime')}</span>
                         {showTip1 ?
                             <IconButton onClick={() => {
-                                console.log('close tip')
                                 setShowTip1(false);
                             }}>
                                 <ArrowDropUpIcon/>
@@ -298,8 +295,6 @@ const DatetimeSend = () => {
                                                     onAccept={e => {
                                                         // const selectedDate=e as Date
                                                         const selectedDate = dayjs(e as Date)
-                                                        console.log(selectedDate)
-                                                        // console.log(e.value())
                                                         setSendTime(selectedDate)
                                                     }}
                                                 />

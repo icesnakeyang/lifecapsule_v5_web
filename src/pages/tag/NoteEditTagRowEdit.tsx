@@ -5,8 +5,6 @@ import {Chip, Grid} from "@mui/material";
 
 const NoteEditTagRowEdit = (data: any) => {
     const item = data.data
-    console.log(data)
-    console.log(item.tagName)
     const editTags = useSelector((state: any) => state.tagSlice.editTags)
     const dispatch = useDispatch()
 
@@ -24,7 +22,6 @@ const NoteEditTagRowEdit = (data: any) => {
     return (
         <Grid item>
             <Chip style={{marginBottom: 0}} color='primary' label={item.tagName} size='small' onDelete={() => {
-                console.log('delete' + item.tagName)
                 onRemoveTag()
             }}/>
         </Grid>

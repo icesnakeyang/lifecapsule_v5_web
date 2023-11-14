@@ -2,9 +2,7 @@ import {Tag} from "@mui/icons-material";
 import {Chip, Grid} from "@mui/material";
 
 const MyAllTagRow = (data: any) => {
-    console.log(data)
     const {item} = data
-    console.log(item.tagName)
     const onSelectTag = () => {
         data.onSelectTag(item)
     }

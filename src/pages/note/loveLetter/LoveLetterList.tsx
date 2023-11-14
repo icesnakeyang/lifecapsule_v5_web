@@ -25,7 +25,7 @@ const LoveLetterList = () => {
     const [msgType, setMsgType] = useState<AlertColor>()
     const [showMsg, setShowMsg] = useState(false)
     const [searchKey, setSearchKey] = useState('')
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         loadAllData()
@@ -72,8 +72,9 @@ const LoveLetterList = () => {
 
                     <Card style={{marginTop: 10, padding: 20, background: theme.palette.background.default}}>
                         <Grid container rowSpacing={1} columnSpacing={0}>
-                            <Grid item xs={12} sm={3} md={2} lg={2} xl={2} style={{display:'flex', alignItems:'center'}}>
-                                <Button variant='contained' onClick={()=>{
+                            <Grid item xs={12} sm={3} md={2} lg={2} xl={2}
+                                  style={{display: 'flex', alignItems: 'center'}}>
+                                <Button variant='contained' onClick={() => {
                                     dispatch(clearNoteState())
                                     navigate('/LoveLetterNew')
                                 }}>{t('loveLetter.btNewLoveLetter')}</Button>
@@ -108,7 +109,14 @@ const LoveLetterList = () => {
                                 :
                                 <div style={{textAlign: "center", marginTop: 200}}>
                                     {t('loveLetter.tip4')}
-                                    <Button>{t('loveLetter.btNewLoveLetter')}</Button>
+                                    <Button style={{marginLeft: 10}}
+                                            variant='contained'
+                                            size='small'
+                                            onClick={() => {
+                                                dispatch(clearNoteState())
+                                                navigate('/LoveLetterNew')
+                                            }}
+                                    >{t('loveLetter.btNewLoveLetter')}</Button>
                                 </div>
                     }
                 </div>

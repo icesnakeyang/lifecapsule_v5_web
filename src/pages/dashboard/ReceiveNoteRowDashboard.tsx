@@ -43,7 +43,6 @@ const ReceiveNoteRowDashboard = (data: any) => {
                 }}>
                     <Button
                         onClick={() => {
-                            console.log(row.sendLogId)
                             dispatch(saveSendLogId(row.sendLogId))
                             navigate('/MyReceiveNoteDetail')
                         }}

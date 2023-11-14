@@ -41,7 +41,6 @@ const Dashboard1 = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("lifecapsule_token")
-        console.log(token)
         /**
          * todo
          * check user token login status

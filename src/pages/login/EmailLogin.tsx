@@ -38,11 +38,9 @@ const EmailLogin = () => {
 
     useEffect(() => {
         if (codeStatus === 'SUCCESS') {
-            console.log('out by success')
             return
         }
         if (codeStatus === 'CAN_SEND') {
-            console.log('out by can send')
             return
         }
         if (codeTime === 60) {

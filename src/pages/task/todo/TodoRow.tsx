@@ -36,7 +36,6 @@ const TodoRow = (data: any) => {
     const theme = useTheme()
 
     useEffect(() => {
-        console.log(item.complete)
         setComplete(item.complete)
     }, [])
 
@@ -74,7 +73,6 @@ const TodoRow = (data: any) => {
             taskId: item.taskId,
             complete: foo
         };
-        console.log(params)
         apiUpdateMyTaskTodoCompleteStatus(params)
             .then((res: any) => {
                 if (res.code === 0) {
@@ -110,7 +108,6 @@ const TodoRow = (data: any) => {
                                     style={{color: theme.palette.primary.main}}
                                     checked={complete}
                                     onChange={(e) => {
-                                        console.log(e.target.checked)
                                         setComplete(e.target.checked)
                                         onUpdateCompleteStatus(e.target.checked)
                                     }}
@@ -146,7 +143,6 @@ const TodoRow = (data: any) => {
                                         fontSize: 18
                                     }}>
                                         <Button onClick={() => {
-                                            console.log(item.taskId)
                                             dispatch(saveTodoTaskId(item.taskId))
                                             dispatch(saveDoNotLoadToDoTask(false))
                                             navigate("/TodoEdit");
@@ -195,7 +191,6 @@ const TodoRow = (data: any) => {
                       autoHideDuration={2000}
                       anchorOrigin={{vertical: "top", horizontal: 'center'}}
                       onClose={() => {
-                          console.log('close')
                           setShowMsg(false)
                       }}
             >

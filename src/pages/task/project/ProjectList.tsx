@@ -98,7 +98,6 @@ const ProjectList = () => {
                       autoHideDuration={2000}
                       anchorOrigin={{vertical: "top", horizontal: 'center'}}
                       onClose={() => {
-                          console.log('close')
                           setShowMsg(false)
                       }}
             >

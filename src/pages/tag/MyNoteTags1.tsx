@@ -25,17 +25,13 @@ const MyNoteTags1 = () => {
             <Grid container rowSpacing={1} columnSpacing={1}>
                 {myAllNoteTags.map((item: any, index: any) => (
                     <MyAllTagRow item={item} key={index} onSelectTag={(data: any) => {
-                        console.log(1)
                         if (editTags.length === 0) {
-                            console.log(2)
                             let tags = [
                                 {
                                         tagName: data.tagName
                                 }]
                             dispatch(saveEditTags(tags))
                         } else {
-                            console.log(3)
-                            console.log(editTags)
                             let tags: any = []
                             let cc = 0;
                             editTags.map((item2: any) => {
@@ -45,9 +41,7 @@ const MyNoteTags1 = () => {
                                     tags.push(item2)
                                 }
                             })
-                            console.log(4)
                             if (cc === 0) {
-                                console.log(5)
                                 tags.push(data)
                                 dispatch(saveEditTags(tags))
                             }
