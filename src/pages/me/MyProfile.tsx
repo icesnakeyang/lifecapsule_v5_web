@@ -36,6 +36,7 @@ const MyProfile = () => {
     const [showMsg, setShowMsg] = useState(false)
     const dispatch = useDispatch()
     const [registerTime, setRegisterTime] = useState<Date>()
+    const [userCode, setUserCode] = useState('')
 
     useEffect(() => {
         loadMyProfile()
@@ -49,6 +50,7 @@ const MyProfile = () => {
                 dispatch(saveUserEmail(res.data.userInfo.email))
                 dispatch(saveUserLoginName(res.data.userInfo.loginName))
                 setRegisterTime(res.data.userInfo.registerTime)
+                setUserCode(res.data.userInfo.userCode)
             } else {
                 setMsg(t('syserr.' + res.code))
                 setMsgType('error')
@@ -102,23 +104,39 @@ const MyProfile = () => {
                             navigate(-1)
                         }}>{t('nav.back')}</Button>
                     </Breadcrumbs>
+
+                    <div style={{
+                        color: theme.palette.primary.main,
+                        marginTop: 20,
+                        display: 'flex',
+                        justifyContent: 'right',
+                        marginRight: 20
+                    }}>
+                        <Stack direction='row' spacing={1}>
+                            <div>{t('MyProfile.userCode')}</div>
+                            <div>{userCode}</div>
+                        </Stack>
+                    </div>
+
                     <Card style={{background: theme.palette.background.default}}>
                         <CardHeader title={t("MyProfile.nickname")} style={{color: theme.palette.primary.main}}>
                         </CardHeader>
                         <CardContent>
-                            <Stack direction='row' style={{}}>
-                                <div style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: theme.palette.primary.main
-                                }}>{nickname}</div>
-                                <IconButton aria-label="delete" onClick={() => {
-                                    setModalNickname(true);
-                                }}>
-                                    <BorderColorIcon/>
-                                </IconButton>
-                            </Stack>
+                            <div>
+                                <Stack direction='row' style={{}}>
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: theme.palette.primary.main
+                                    }}>{nickname}</div>
+                                    <IconButton aria-label="delete" onClick={() => {
+                                        setModalNickname(true);
+                                    }}>
+                                        <BorderColorIcon/>
+                                    </IconButton>
+                                </Stack>
+                            </div>
                         </CardContent>
                     </Card>
                     <Card style={{marginTop: 20, background: theme.palette.background.default}}>

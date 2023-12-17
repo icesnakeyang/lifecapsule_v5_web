@@ -1,4 +1,4 @@
-import {Grid, Hidden, IconButton, Paper} from "@mui/material";
+import {Badge, Grid, Hidden, IconButton, Paper} from "@mui/material";
 import BookIcon from '@mui/icons-material/Book';
 import {useNavigate} from "react-router-dom";
 import EmailIcon from '@mui/icons-material/Email';
@@ -11,6 +11,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ScheduleSendIcon from '@mui/icons-material/ScheduleSend';
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 import TheatersIcon from '@mui/icons-material/Theaters';
+import AssistWalkerIcon from '@mui/icons-material/AssistWalker';
+
 const Header2 = () => {
     const navigate = useNavigate()
     const {t} = useTranslation()
@@ -49,6 +51,37 @@ const Header2 = () => {
                 </Grid>
             </Hidden>
 
+            {/*procrastination*/}
+            <Hidden mdUp>
+                <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
+                    <IconButton onClick={() => {
+                        navigate('/ProcrastinationList')
+                    }}>
+                        <AssistWalkerIcon fontSize='large' color='primary'/>
+                    </IconButton>
+                </Grid>
+            </Hidden>
+            <Hidden mdDown>
+                <Grid item md={3} lg={1} xl={1}
+                      style={{display: 'flex', justifyContent: 'center'}}>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: "column"
+                    }}>
+                        <IconButton onClick={() => {
+                            navigate('/ProcrastinationList')
+                        }}>
+                            <Badge badgeContent={1} color='secondary'>
+                                <AssistWalkerIcon color='primary' fontSize='large'/>
+                            </Badge>
+                        </IconButton>
+                        <div style={{color: theme.palette.primary.main, fontSize: 14}}>{t('nav.procrastination')}</div>
+                    </div>
+                </Grid>
+            </Hidden>
+
             {/*myInbox*/}
             <Hidden mdUp>
                 <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
@@ -68,10 +101,13 @@ const Header2 = () => {
                         alignItems: 'center',
                         flexDirection: "column"
                     }}>
+
                         <IconButton onClick={() => {
                             navigate('/MyReceiveNoteList')
                         }}>
-                            <EmailIcon color='primary' fontSize='large'/>
+                            <Badge badgeContent={1} color='secondary'>
+                                <EmailIcon color='primary' fontSize='large'/>
+                            </Badge>
                         </IconButton>
                         <div style={{color: theme.palette.primary.main, fontSize: 14}}>{t('nav.inbox')}</div>
                     </div>

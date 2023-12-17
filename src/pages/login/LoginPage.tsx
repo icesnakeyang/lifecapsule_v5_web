@@ -1,8 +1,8 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Box, Button, Container, IconButton, Paper} from "@mui/material";
+import {Alert, AlertColor, Box, Button, CircularProgress, IconButton, Snackbar} from "@mui/material";
 import HeaderLogin from "../common/HeaderLogin";
 import {useTheme} from "@mui/material/styles";
 import EmailLogin from "./EmailLogin";
@@ -20,6 +20,10 @@ const LoginPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const theme = useTheme()
+    const [msg, setMsg] = useState('')
+    const [msgType, setMsgType] = useState<AlertColor>()
+    const [showMsg, setShowMsg] = useState(false)
+    const [saving, setSaving] = useState(false)
 
     const onSignAsGuest = () => {
         /**
@@ -38,8 +42,18 @@ const LoginPage = () => {
                 }
                 dispatch(saveLoginData(data))
                 navigate("/Dashboard1", {replace: true});
+            } else {
+                setMsg(t('syserr.' + res.code))
+                setMsgType('error')
+                setShowMsg(true)
+                setSaving(false)
             }
-        });
+        }).catch(() => {
+            setMsg(t('syserr.10001'))
+            setMsgType('error')
+            setShowMsg(true)
+            setSaving(false)
+        })
     }
 
     return (
@@ -96,11 +110,28 @@ const LoginPage = () => {
                     }
                 </Box>
             </Box>
-            <Box sx={{textAlign: 'center', marginTop: 5}}>
-                <Button onClick={() => {
-                    onSignAsGuest()
-                }}>{t('login.btGuestIn')}</Button>
+
+            <Box sx={{textAlign: 'center', marginTop: 1}}>
+                {saving ?
+                    <CircularProgress/>
+                    :
+                    <Button onClick={() => {
+                        onSignAsGuest()
+                    }}>{t('login.btGuestIn')}</Button>
+                }
             </Box>
+
+            <Snackbar
+                open={showMsg}
+                autoHideDuration={2000}
+                onClose={() => {
+                    setShowMsg(false)
+                }}
+                message='note archieved'
+                anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+            >
+                <Alert severity={msgType} variant='filled'>{msg}</Alert>
+            </Snackbar>
         </Box>
     )
 }

@@ -52,7 +52,8 @@
     "loveLetter": "Love Letters",
     "toFuture": "To Future",
     "Inspiration": "Inspiration",
-    "myHistory": "My History"
+    "myHistory": "My History",
+    "procrastination": "Procrastination"
   },
   "login": {
     "tabEmail": "Email",
@@ -155,12 +156,23 @@
       "recentContact": "My recent contact",
       "toEmail": "To email",
       "createTime": "Create time",
-      "tipNoEmail": "You must specify the receiver email",
+      "tipNoEmail": "You must specify the receiver email or user code",
       "receiverEmail": "Receiver email",
       "sendUser": "Send user",
       "sendUserEmail": "Send user email",
       "sendTime": "Send time",
       "readTime": "Read time",
+      "userCode": "User code",
+      "tipUserCode": "Input recipient's LifeCapsule user code",
+      "SearchUser": {
+        "title": "Choose recipient",
+        "searchPlaceholder": "User code/email",
+        "tipNoToUserKey": "Please input userCode or email you want to search",
+        "userCode": "User code",
+        "email": "Email",
+        "nickname": "Nickname",
+        "btChoose": "Choose"
+      },
       "InstantSend": {
         "tipNoteSend": "What is send instantly",
         "tipNoteSend2": "You can set a email who you want to send, The system will send to the email directly",
@@ -395,7 +407,8 @@
     "tipSetLoginNameSuccess": "Set login name and password success",
     "password": "Password",
     "password2": "Confirm password",
-    "btBindEmail": "Bind email"
+    "btBindEmail": "Bind email",
+    "userCode": "User code"
   },
   "noteList": {
     "noNote": "You have not create any note so far,",
@@ -685,6 +698,8 @@
     "10076": "Login name or password error",
     "10080": "This note has been overdue yet",
     "10083": "You must set the send time",
-    "10084": "The email you want to send is not correct"
+    "10084": "The email you want to send is not correct",
+    "10085": "You must input userCode or email",
+    "10086": "No such user"
   }
 }

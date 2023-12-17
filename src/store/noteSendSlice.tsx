@@ -25,7 +25,8 @@ export const noteSendSlice = createSlice({
         sendNoteContent: '',
         sendNoteTitle: '',
         sendToName: '',
-        sendToEmail: ''
+        sendToEmail: '',
+        sendToUserCode: ''
     },
     reducers: {
         saveReceiveNoteList: (state: any, action: PayloadAction<number>) => {
@@ -81,12 +82,16 @@ export const noteSendSlice = createSlice({
         saveSendQuePageSize: (state: any, action: any) => {
             state.sendQuePageSize = action.payload
         },
-        clearSendData:(state:any)=>{
-            state.sendNoteTitle=''
-            state.sendNoteContent=''
-            state.sendToEmail=''
-            state.sendToName=''
-            state.fromName=''
+        clearSendData: (state: any) => {
+            state.sendNoteTitle = ''
+            state.sendNoteContent = ''
+            state.sendToEmail = ''
+            state.sendToName = ''
+            state.fromName = ''
+            state.sendToUserCode = ''
+        },
+        saveSendToUserCode: (state: any, action: Action1) => {
+            state.sendToUserCode = action.payload
         }
     },
 });
@@ -109,7 +114,8 @@ export const {
     saveSendNoteTitle,
     saveSendQuePageIndex,
     saveSendQuePageSize,
-    clearSendData
+    clearSendData,
+    saveSendToUserCode
 } = noteSendSlice.actions;
 
 export default noteSendSlice.reducer;

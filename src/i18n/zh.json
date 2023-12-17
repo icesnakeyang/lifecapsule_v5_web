@@ -152,12 +152,23 @@
       "recentContact": "最近联系人",
       "toEmail": "接收人Email",
       "createTime": "创建时间",
-      "tipNoEmail": "必须指定接收人的email",
+      "tipNoEmail": "必须指定接收人的email或者用户通讯码",
       "receiverEmail": "请输入发送人的Email",
       "sendUser": "发送人",
       "sendUserEmail": "发送人Email",
       "sendTime": "发送时间",
       "readTime": "阅读时间",
+      "userCode": "通讯码",
+      "tipUserCode": "你要发送的时空笔记用户的通讯码",
+      "SearchUser": {
+        "title": "选择你要发送的用户",
+        "searchPlaceholder": "通讯码/Email",
+        "tipNoToUserKey": "请输入你要查询用户的通讯码或者Email",
+        "userCode": "通讯码",
+        "email": "Email",
+        "nickname": "昵称",
+        "btChoose": "选择"
+      },
       "InstantSend": {
         "tipNoteSend": "说明",
         "tipNoteSend2": "设置一个接收人的Email，系统将立即把该笔记信息发送到接收人的Email邮箱",
@@ -395,7 +406,8 @@
     "btSetLoginName": "设置登录名",
     "password": "密码",
     "password2": "确认密码",
-    "btBindEmail": "绑定Email"
+    "btBindEmail": "绑定Email",
+    "userCode": "通讯码"
   },
   "noteList": {
     "noNote": "你目前还没有创建笔记,",
@@ -655,6 +667,8 @@
     "10075": "登录名已被其他用户注册了",
     "10076": "登录名或密码错误",
     "10083": "必须设置发送时间",
-    "10084": "要发送的email格式不正确"
+    "10084": "要发送的email格式不正确",
+    "10085": "请输入用户通讯码或者Email",
+    "10086": "没有查询到该用户"
   }
 }

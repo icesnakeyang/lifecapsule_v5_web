@@ -33,6 +33,9 @@ import LoveLetterEdit from "../pages/note/loveLetter/LoveLetterEdit";
 import LoveLetterNew from "../pages/note/loveLetter/LoveLetterNew";
 import TodoNew from "../pages/task/todo/TodoNew";
 import LoveLetterTriggerEdit from "../pages/note/loveLetter/LoveLetterTriggerEdit";
+import ProcrastinationList from "../pages/note/procrastination/ProcrastinationList";
+import ProcrastinationEdit from "../pages/note/procrastination/ProcrastinationEdit";
+import ProcrastinationNew from "../pages/note/procrastination/ProcrastinationNew";
 
 const Routers = (data: any) => {
     const navigate = useNavigate()
@@ -86,6 +89,9 @@ const Routers = (data: any) => {
             <Route path='/LoveLetterNew' element={<LoveLetterNew/>}/>
             <Route path='/TodoNew' element={<TodoNew/>}/>
             <Route path='/LoveLetterTriggerEdit' element={<LoveLetterTriggerEdit/>}/>
+            <Route path='/ProcrastinationList' element={<ProcrastinationList/>}/>
+            <Route path='/ProcrastinationEdit' element={<ProcrastinationEdit/>}/>
+            <Route path='/ProcrastinationNew' element={<ProcrastinationNew/>}/>
         </Routes>
     )
 }

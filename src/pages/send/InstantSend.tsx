@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {apiCreateTriggerInstant, apiListMyContact, apiRequestRsaPublicKey} from "../../api/Api";
+import {apiCreateTriggerInstant, apiGetToUser, apiListMyContact, apiRequestRsaPublicKey} from "../../api/Api";
 import {Encrypt, GenerateKey, RSAencrypt} from "../../common/crypto";
 import {
     Alert,
@@ -12,14 +12,14 @@ import {
     Button, Card, CardContent, CardHeader, CircularProgress, Collapse,
     Dialog, DialogContent, DialogTitle,
     Divider,
-    Grid, Hidden, IconButton, Input, Paper,
+    Grid, Hidden, IconButton, Input, InputBase, Paper,
     Snackbar,
     Stack,
     TextField
 } from "@mui/material";
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import GroupIcon from '@mui/icons-material/Group';
-import {saveSendNoteContent, saveSendToEmail, saveSendToName} from "../../store/noteSendSlice";
+import {saveSendNoteContent, saveSendToEmail, saveSendToName, saveSendToUserCode} from "../../store/noteSendSlice";
 import InfoIcon from '@mui/icons-material/Info';
 import SendContactRow from "./SendContactRow";
 import {useTheme} from "@mui/material/styles";
@@ -28,6 +28,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import CryptoJS from "crypto-js";
+import {Search} from "@mui/icons-material";
+import {saveNotePageIndex} from "../../store/noteDataSlice";
+import {loadRefresh} from "../../store/commonSlice";
+import SearchIcon from "@mui/icons-material/Search";
+import {Pagination} from "@mui/lab";
+import ContactBox2 from "../common/contact/ContactBox2";
+import ContactBox4 from "../common/contact/ContactBox4";
+import ContactBox1 from "../common/contact/ContactBox1";
 
 const InstantSend = () => {
     const noteId = useSelector((state: any) => state.noteDataSlice.noteId)
@@ -45,21 +53,34 @@ const InstantSend = () => {
     const [pageIndex, setPageIndex] = useState(1)
     const [pageSize, setPageSize] = useState(10)
     const [contactList, setContactList] = useState([])
+    const [totalContact, setTotalContact] = useState(0)
     const sendToName = useSelector((state: any) => state.noteSendSlice.sendToName) || ''
-    const sendToEmail = useSelector((state: any) => state.noteSendSlice.sendToEmail)
+    const sendToEmail = useSelector((state: any) => state.noteSendSlice.sendToEmail) || ''
     const nickname = useSelector((state: any) => state.loginSlice.nickname)
     const [msg, setMsg] = useState("")
     const [msgType, setMsgType] = useState<AlertColor>('success')
     const [showMsg, setShowMsg] = useState(false)
     const theme = useTheme()
     const [showTip1, setShowTip1] = useState(false)
+    const [modalToUser, setModalToUser] = useState(false)
+    const [searchUserKey, setSearchUserKey] = useState('')
+    const [searchResultUserNickname, setSearchResultUserNickname] = useState('')
+    const [searchResultUserUserCode, setSearchResultUserUserCode] = useState('')
+    const [searchResultUserUserEmail, setSearchResultUserUserEmail] = useState('')
+    const [searchResultUserId, setSearchResultUserId] = useState('')
+    const [recipientUserId, setRecipientUserId] = useState('')
+    const [searching, setSearching] = useState(false)
+    const sendToUserCode = useSelector((state: any) => state.noteSendSlice.sendToUserCode) || ''
 
     useEffect(() => {
         setContent(sendNoteContent)
         setTitle(sendNoteTitle)
         setFromName(nickname)
-        loadAllData()
     }, [])
+
+    useEffect(() => {
+        loadAllData()
+    }, [pageIndex])
 
     const loadAllData = () => {
         let params = {
@@ -69,6 +90,9 @@ const InstantSend = () => {
         apiListMyContact(params).then((res: any) => {
             if (res.code === 0) {
                 setContactList(res.data.contactList)
+                let total = res.data.totalContact
+                total = Math.ceil(total / pageSize)
+                setTotalContact(total)
             } else {
                 setMsg(t('syserr.' + res.code))
                 setMsgType('error')
@@ -94,7 +118,7 @@ const InstantSend = () => {
             setShowMsg(true)
             return;
         }
-        if (!sendToEmail) {
+        if (!sendToEmail && !sendToUserCode) {
             setMsg(t('MyNotes.SendPage.tipNoEmail'))
             setMsgType('error')
             setShowMsg(true)
@@ -121,7 +145,8 @@ const InstantSend = () => {
             fromName,
             noteContent: sendNoteContent,
             encryptKey: {},
-            keyToken: ''
+            keyToken: '',
+            toUserCode: sendToUserCode
         }
 
         setSaving(true)
@@ -193,8 +218,46 @@ const InstantSend = () => {
         )
     }
 
+    const onSearchToUser = () => {
+        if (!searchUserKey) {
+            setSearchResultUserNickname('')
+            setSearchResultUserUserCode('')
+            setSearchResultUserUserEmail('')
+            setSearchResultUserId('')
+            return
+        }
+        let params = {
+            toUserKey: searchUserKey
+        }
+        setSearching(true)
+        setSearchResultUserNickname('')
+        setSearchResultUserUserCode('')
+        setSearchResultUserUserEmail('')
+        setSearchResultUserId('')
+        apiGetToUser(params).then((res: any) => {
+            if (res.code === 0) {
+                setSearchResultUserNickname(res.data.toUser.nickname)
+                setSearchResultUserUserCode(res.data.toUser.userCode)
+                setSearchResultUserUserEmail(res.data.toUser.email)
+                setSearchResultUserId(res.data.toUser.userId)
+                setSearching(false)
+            } else {
+                setMsg(t('syserr.' + res.code))
+                setMsgType('error')
+                setShowMsg(true)
+                setSearching(false)
+            }
+        }).catch(() => {
+            setMsg(t('syserr.10001'))
+            setMsgType('error')
+            setShowMsg(true)
+            setSearching(false)
+        })
+    }
+
     const onSelectContact = (data: any) => {
-        setModalContact(false)
+        // setModalContact(false)
+        setModalToUser(false)
     }
     return (
         <div style={{}}>
@@ -302,7 +365,8 @@ const InstantSend = () => {
                                                         value={sendToName}
                                                     />
                                                     <Button style={{marginTop: 5}} onClick={() => {
-                                                        setModalContact(true)
+                                                        // setModalContact(true)
+                                                        setModalToUser(true)
                                                     }}><GroupIcon/>
                                                     </Button>
                                                 </Stack>
@@ -313,6 +377,23 @@ const InstantSend = () => {
                                                     marginTop: 5,
                                                     fontSize: 14
                                                 }}>{t('MyNotes.SendPage.tipToName')}</div>
+
+                                            {/*to user code*/}
+                                            <div style={{marginTop: 20}}>
+                                                <TextField
+                                                    variant='standard'
+                                                    label={t('MyNotes.SendPage.userCode')}
+                                                    style={{width: '100%'}}
+                                                    onChange={e => {
+                                                        dispatch(saveSendToEmail(e.target.value))
+                                                    }} value={sendToUserCode}/>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    color: theme.palette.primary.main,
+                                                    marginTop: 5,
+                                                    fontSize: 14
+                                                }}> {t('MyNotes.SendPage.tipUserCode')}</div>
 
                                             {/*to email*/}
                                             <div style={{marginTop: 20}}>
@@ -417,7 +498,7 @@ const InstantSend = () => {
                                             }}>
                                                 {saving ?
                                                     <CircularProgress/>
-                                                     :
+                                                    :
                                                     <Button variant='contained' style={{width: 140}}
                                                             onClick={() => {
                                                                 onSend();
@@ -502,6 +583,8 @@ const InstantSend = () => {
                     }
                 </DialogContent>
             </Dialog>
+
+            <ContactBox1/>
 
             <Snackbar open={showMsg}
                       autoHideDuration={2000}

@@ -1,8 +1,10 @@
 import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
-import {Box, Button, Card, CardContent, CardHeader, Grid, IconButton, Paper, Stack} from "@mui/material";
-import {saveSendToEmail, saveSendToName} from "../../store/noteSendSlice";
+import {Avatar, Box, Button, Card, CardContent, CardHeader, Grid, IconButton, Paper, Stack} from "@mui/material";
+import {saveSendToEmail, saveSendToName, saveSendToUserCode} from "../../store/noteSendSlice";
 import {useTheme} from "@mui/material/styles";
+import PinIcon from '@mui/icons-material/Pin';
+import EmailIcon from '@mui/icons-material/Email';
 
 const SendContactRow = (data: any) => {
     const {t} = useTranslation()
@@ -10,31 +12,46 @@ const SendContactRow = (data: any) => {
     const dispatch = useDispatch()
     const theme = useTheme()
     return (
-        <Card style={{
+        <Paper style={{
             marginTop: 5,
             background: theme.palette.background.default,
             border: '1px solid',
             borderColor: theme.palette.primary.main
         }}>
-            <CardContent style={{padding:10}}>
-                <Grid container rowSpacing={1} alignItems='center'>
-                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-                        <Button onClick={()=>{
-                            let data = {
-                                contactName: item.contactName,
-                                email: item.email
-                            }
-                            dispatch(saveSendToName(item.contactName))
-                            dispatch(saveSendToEmail(item.email))
-                            onSelect(data)
-                        }}>{item.contactName}</Button>
+            <Button style={{width: '100%'}} onClick={() => {
+                let data = {
+                    contactName: item.contactName,
+                    email: item.email,
+                    userCode: item.userCode
+                }
+                dispatch(saveSendToName(item.contactName))
+                dispatch(saveSendToEmail(item.email))
+                dispatch(saveSendToUserCode(item.userCode))
+                onSelect(data)
+            }}>
+                <Grid container>
+                    <Grid item xs={12} sm={5} md={4} lg={4} xl={4}>
+                        <Stack direction='row' spacing={1}>
+                            <Avatar sx={{width: 24, height: 24}}/>
+                            <div>{item.contactName}</div>
+                        </Stack>
                     </Grid>
-                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-                        {item.email}
+                    <Grid item xs={12} sm={7} md={5} lg={5} xl={5}>
+                        <Stack direction='row' spacing={1}>
+                            <EmailIcon/>
+                            <div>{item.email}</div>
+                        </Stack>
+
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+                        <Stack direction='row' spacing={1}>
+                            <PinIcon/>
+                            <div>{item.userCode}</div>
+                        </Stack>
                     </Grid>
                 </Grid>
-            </CardContent>
-        </Card>
+            </Button>
+        </Paper>
     )
 }
 export default SendContactRow
