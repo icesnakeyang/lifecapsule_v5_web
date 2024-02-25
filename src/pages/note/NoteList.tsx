@@ -1,7 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
 import {apiListMyNote, apiListUserNoteTag} from "../../api/Api";
 import {useEffect, useState} from "react";
-import {saveNoteList, saveNoteListSearchKey, saveNotePageIndex} from "../../store/noteDataSlice";
+import {
+    clearNoteSearchKey,
+    saveNoteList,
+    saveNoteListSearchKey,
+    saveNotePageIndex,
+    saveNoteSearchKey
+} from "../../store/noteDataSlice";
 import {
     Alert,
     AlertColor,
@@ -18,7 +24,7 @@ import {
     DialogContentText,
     DialogTitle,
     Divider, Grid, Hidden,
-    IconButton,
+    IconButton, InputAdornment,
     InputBase,
     Modal,
     Paper,
@@ -66,13 +72,13 @@ const NoteList = () => {
     const theme = useTheme()
     const [modalTag, setModalTag] = useState(false)
     const noteListSearchKey = useSelector((state: any) => state.noteDataSlice.noteListSearchKey)
-    const [searchKey, setSearchKey] = useState('')
+    const searchKey = useSelector((state: any) => state.noteDataSlice.noteSearchKey)
     const [notePages, setNotePages] = useState(1)
 
     useEffect(() => {
         listMyNote()
         loadBaseData()
-    }, [refresh, notePageIndex, notePageSize])
+    }, [refresh, notePageIndex, notePageSize, searchKey])
 
     const listMyNote = () => {
         let params = {
@@ -175,15 +181,24 @@ const NoteList = () => {
                                     }}
                                                placeholder={t('MyNotes.NoteList.searchHolder')}
                                                onChange={e => {
-                                                   setSearchKey(e.target.value.trim())
+                                                   dispatch(saveNotePageIndex(1))
+                                                   dispatch(saveNoteSearchKey(e.target.value))
                                                }}
+                                               value={searchKey}
+                                               endAdornment={
+                                                   searchKey && (
+                                                       <InputAdornment position='end'>
+                                                           <IconButton
+                                                               onClick={() => {
+                                                                   dispatch(clearNoteSearchKey())
+                                                               }}
+                                                           >
+                                                               <CloseIcon/>
+                                                           </IconButton>
+                                                       </InputAdornment>
+                                                   )
+                                               }
                                     />
-                                    <IconButton type="button" aria-label="search" onClick={() => {
-                                        dispatch(saveNotePageIndex(1))
-                                        dispatch(loadRefresh())
-                                    }}>
-                                        <SearchIcon style={{color: theme.palette.primary.main}}/>
-                                    </IconButton>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={12} lg={12}>
                                     <div style={{display: 'flex', alignItems: 'center'}}>
@@ -259,7 +274,7 @@ const NoteList = () => {
                     >
                         <CloseIcon/>
                     </IconButton>
-                    <div style={{marginTop:40}}>
+                    <div style={{marginTop: 40}}>
                         <Grid container spacing={0.5} rowSpacing={0.5}>
                             {myNoteTags && myNoteTags.length > 0 ?
                                 myNoteTags.map((item: any, index: any) => (
