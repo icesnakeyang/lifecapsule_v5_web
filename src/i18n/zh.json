@@ -52,7 +52,8 @@
     "loveLetter": "情书",
     "toFuture": "给未来的信",
     "Inspiration": "灵感启发",
-    "myHistory": "找回记忆"
+    "myHistory": "找回记忆",
+    "procrastination": "防拖延笔记"
   },
   "login": {
     "tabEmail": "Email",
@@ -243,7 +244,10 @@
         "btPublishing": "发布中",
         "tipPublishToWebSuccess": "发布成功"
       }
-    }
+    },
+    "pNote": "父（来源）笔记",
+    "btSaveReply": "保存回复",
+    "childNoteList": "回复的笔记"
   },
   "Tag": {
     "tags": "标签",
@@ -645,6 +649,14 @@
       "unSet": "待定",
       "tipUnset": "暂不发送"
     }
+  },
+  "noteType": {
+    "NOTE": "笔记",
+    "ANTI_DELAY_NOTE": "防拖延笔记",
+    "LOVE_LETTER": "情书",
+    "FUTURE": "给未来的信",
+    "INSPIRATION": "灵感启发",
+    "LAST_WORDS": "遗言"
   },
   "syserr": {
     "10001": "系统错误",

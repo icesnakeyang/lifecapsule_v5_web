@@ -1,8 +1,8 @@
 import {Get, Post} from "./ApiBase";
 
-const host = "http://localhost:8003/lifecapsule_api";
+// const host = "http://localhost:8003/lifecapsule_api";
 // const host = "http://124.217.246.120:8003/lifecapsule3_api";
-// const host = "https://tellmeafter.com/lifecapsule_api";
+const host = "https://tellmeafter.com/lifecapsule_api";
 // const host = "http://192.168.1.16:8003/lifecapsule3_api";
 
 export const apiLogin = (params: any) => {
@@ -399,4 +399,7 @@ export const apiGetLoveLetterTrigger = (params:any) => {
 };
 export const apiGetToUser = (params:any) => {
     return Post(`${host}/web/contact/getToUser`, params);
+};
+export const apiLoadNoteAllData = (params:any) => {
+    return Post(`${host}/web/note/loadNoteAllData`, params);
 };

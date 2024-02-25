@@ -16,7 +16,8 @@ const NoteRow1 = (data: any) => {
         <Paper sx={{marginTop: 1, maxWidth: 1080, background: theme.palette.background.default}}>
             <Button variant='outlined' sx={{width: '100%'}} onClick={() => {
                 dispatch(saveNoteId(row.noteId))
-                navigate('/NoteEdit')
+                // navigate('/NoteEdit')
+                navigate('/NoteDetail')
             }}>
                 <span style={{color: theme.palette.primary.main}}>
                     {row?.title ? row.title : 'no title'}

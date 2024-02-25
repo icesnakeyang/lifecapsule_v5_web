@@ -48,6 +48,9 @@ const ProcrastinationList = () => {
                 setMsg(t('syserr.' + res.code))
                 setMsgType('error')
                 setShowMsg(true)
+                if(res.code===10003){
+                    navigate('/LoginPage')
+                }
             }
         }).catch(() => {
             setMsg('成功')

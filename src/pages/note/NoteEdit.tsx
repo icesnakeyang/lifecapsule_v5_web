@@ -93,8 +93,11 @@ const NoteEdit = () => {
                         setTitle(note.title);
                         if (note.encrypt === 1) {
                             let strKey = note.userEncodeKey;
+                            console.log(strKey)
                             strKey = Decrypt2(strKey, keyAES_1);
+                            console.log(strKey)
                             let content = Decrypt(note.content, strKey, strKey);
+                            console.log(content)
                             setEncrypt(true);
                             setContent(content);
                         } else {

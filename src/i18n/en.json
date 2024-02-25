@@ -247,7 +247,10 @@
         "btPublishing": "Publishing",
         "tipPublishToWebSuccess": "Publish to article success"
       }
-    }
+    },
+    "pNote": "Parent Note",
+    "btSaveReply": "Save reply",
+    "childNoteList": "Reply"
   },
   "Tag": {
     "addTag": "Add tag",
@@ -675,6 +678,14 @@
       "unSet": "Wait",
       "tipUnset": "It won't send until you set this trigger condition"
     }
+  },
+  "noteType": {
+    "NOTE": "Note",
+    "ANTI_DELAY_NOTE": "Procrastination",
+    "LOVE_LETTER": "Love",
+    "FUTURE": "To Future",
+    "INSPIRATION": "Inspiration",
+    "LAST_WORDS": "Last Words"
   },
   "syserr": {
     "10001": "System or network error",

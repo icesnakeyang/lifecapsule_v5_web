@@ -12,11 +12,14 @@ import ScheduleSendIcon from '@mui/icons-material/ScheduleSend';
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 import TheatersIcon from '@mui/icons-material/Theaters';
 import AssistWalkerIcon from '@mui/icons-material/AssistWalker';
+import {useDispatch} from "react-redux";
+import {saveProcrastinationPageIndex, saveProcrastinationPageSize} from "../../store/procrastinationSlice";
 
 const Header2 = () => {
     const navigate = useNavigate()
     const {t} = useTranslation()
     const theme = useTheme()
+    const dispatch=useDispatch()
     return (
         <Grid container rowSpacing={1} columnSpacing={1} style={{
             // display: 'flex', justifyContent: 'center'
@@ -55,6 +58,8 @@ const Header2 = () => {
             <Hidden mdUp>
                 <Grid item xs={2} sm={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => {
+                        dispatch(saveProcrastinationPageIndex(1))
+                        dispatch(saveProcrastinationPageSize(10))
                         navigate('/ProcrastinationList')
                     }}>
                         <AssistWalkerIcon fontSize='large' color='primary'/>
@@ -71,9 +76,11 @@ const Header2 = () => {
                         flexDirection: "column"
                     }}>
                         <IconButton onClick={() => {
+                            dispatch(saveProcrastinationPageIndex(1))
+                            dispatch(saveProcrastinationPageSize(10))
                             navigate('/ProcrastinationList')
                         }}>
-                            <Badge badgeContent={1} color='secondary'>
+                            <Badge badgeContent={0} color='secondary'>
                                 <AssistWalkerIcon color='primary' fontSize='large'/>
                             </Badge>
                         </IconButton>
@@ -105,7 +112,7 @@ const Header2 = () => {
                         <IconButton onClick={() => {
                             navigate('/MyReceiveNoteList')
                         }}>
-                            <Badge badgeContent={1} color='secondary'>
+                            <Badge badgeContent={0} color='secondary'>
                                 <EmailIcon color='primary' fontSize='large'/>
                             </Badge>
                         </IconButton>
