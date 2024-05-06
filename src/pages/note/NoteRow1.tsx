@@ -1,9 +1,10 @@
-import {Box, Button, Chip, Grid, Paper, Stack} from "@mui/material";
+import {Box, Button, Chip, Grid, IconButton, Paper, Stack} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/material/styles";
 import {saveNoteId} from "../../store/noteDataSlice";
+import EditIcon from '@mui/icons-material/Edit';
 
 const NoteRow1 = (data: any) => {
     const row = data.data;
@@ -27,13 +28,19 @@ const NoteRow1 = (data: any) => {
                 </Button>
                 {row && row.tagList && row.tagList.length > 0 ?
                     <div style={{display: "flex", justifyContent: "center", padding: 5}}>
-                        <Stack direction='row' spacing={1}>
+                        <Stack direction='row' spacing={1} alignItems='center'>
                             {
                                 row.tagList.map((item: any, index: any) => (
                                     <Chip size='small'
                                           label={item.tagName} key={index}/>
                                 ))
                             }
+                            <IconButton size='small' onClick={()=>{
+                                dispatch(saveNoteId(row.noteId))
+                                navigate('/NoteEdit')
+                            }}>
+                                <EditIcon style={{fontSize:18}}/>
+                            </IconButton>
                         </Stack>
                     </div>
                     :

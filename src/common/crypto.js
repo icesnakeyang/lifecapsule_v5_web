@@ -1,6 +1,6 @@
 // import CryptoJS from '../node_modules/crypto-js/crypto-js.js'
 import CryptoJS from "crypto-js";
-import { JSEncrypt } from "jsencrypt";
+import {JSEncrypt} from "jsencrypt";
 
 export function GenerateKey() {
     const uuidStr =
@@ -40,6 +40,7 @@ export function RSAencrypt(content, publicKey) {
     const result = jse.encrypt(content);
     return result;
 }
+
 export function GenerateRandomString16() {
     let x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
     let tmp = "";
@@ -60,6 +61,9 @@ export function Decrypt2(word, keyStr) {
 }
 
 export function Decrypt(cipherText, keyStr, ivStr) {
+    console.log(cipherText)
+    console.log(keyStr)
+    console.log(ivStr)
     let cipherTextHexStr = CryptoJS.enc.Hex.parse(cipherText);
     let cipherTextBase64Str = CryptoJS.enc.Base64.stringify(cipherTextHexStr);
     let key = CryptoJS.enc.Utf8.parse(keyStr);

@@ -1,50 +1,48 @@
-import {useDispatch, useSelector} from "react-redux";
-import {apiLoadNoteAllData, apiRequestRsaPublicKey} from "../../api/Api";
-import {useEffect, useState} from "react";
-import {Decrypt, Decrypt2, GenerateRandomString16, RSAencrypt} from "../../common/crypto";
 import {
-    Alert, AlertColor, Breadcrumbs,
-    Button, ButtonProps,
+    Alert,
+    AlertColor,
+    Breadcrumbs,
+    Button,
     Card,
     CardContent,
-    CardHeader,
-    Dialog, DialogActions,
-    DialogContent, Paper,
-    Snackbar,
-    Stack, styled,
+    CardHeader, Chip, Dialog, DialogActions, DialogContent,
+    Snackbar, Stack,
     TextField
 } from "@mui/material";
-import moment from "moment";
-import {useTranslation} from "react-i18next";
-import Header1 from "../common/Header1";
-import {useTheme} from "@mui/material/styles";
-import {grey, purple} from "@mui/material/colors";
-import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {apiLoadNoteAllData, apiRequestRsaPublicKey} from "../../api/Api";
+import {Decrypt, Decrypt2, GenerateRandomString16, RSAencrypt} from "../../common/crypto";
 import {saveNoteId, savePTitle} from "../../store/noteDataSlice";
+import Header1 from "../common/Header1";
+import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router-dom";
+import moment from "moment";
+import {useTheme} from "@mui/material/styles";
 import NoteChildRow from "./NoteChildRow";
 import {saveSendLogId} from "../../store/noteReceiveSlice";
 
 const NoteDetail = () => {
+    const [msg, setMsg] = useState('')
+    const [msgType, setMsgType] = useState<AlertColor>()
+    const [showMsg, setShowMsg] = useState(false)
     const noteId = useSelector((state: any) => state.noteDataSlice.noteId)
     const [title, setTitle] = useState('')
+    const dispatch = useDispatch()
+    const [pid, setPid] = useState('')
+    const [tagList, setTagList] = useState([])
     const [content, setContent] = useState('')
     const [createTime, setCreateTime] = useState(null)
     const [pTitle, setPTitle] = useState('')
     const [pContent, setPContent] = useState('')
-    const {t} = useTranslation()
-    const [childList, setChildList] = useState([])
-    const [pTime, setPTime] = useState(null)
-    const [modalReply, setModalReply] = useState(false)
-    const [msg, setMsg] = useState('')
-    const [msgType, setMsgType] = useState<AlertColor>()
-    const [showMsg, setShowMsg] = useState(false)
-    const theme = useTheme()
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const [pid, setPid] = useState('')
     const [pNoteType, setPNoteType] = useState(null)
+    const [pTime, setPTime] = useState(null)
     const [sendLogId, setSendLogId] = useState('')
-
+    const [childList, setChildList] = useState([])
+    const {t} = useTranslation()
+    const navigate = useNavigate()
+    const theme = useTheme()
+    const [modalReply, setModalReply] = useState(false)
 
     useEffect(() => {
         loadAllData()
@@ -53,7 +51,6 @@ const NoteDetail = () => {
     useEffect(() => {
         loadAllData()
     }, [])
-
 
     const loadAllData = () => {
         let params = {
@@ -69,7 +66,7 @@ const NoteDetail = () => {
                 apiLoadNoteAllData(params).then((res: any) => {
                     if (res.code === 0) {
                         let note = res.data.noteDetail
-                        if (note.encrypt === 1) {
+                        if (note.content && note.encrypt === 1) {
                             let strKey = note.userEncodeKey
                             console.log(strKey)
                             strKey = Decrypt2(strKey, keyAES_1)
@@ -82,10 +79,11 @@ const NoteDetail = () => {
                         setTitle(note.title)
                         dispatch(savePTitle('Re:' + note.title))
                         setPid(note.pid)
+                        setTagList(note.tagList)
                         if (res.data.noteParent) {
                             let pnote = res.data.noteParent
                             setPTitle(pnote.title)
-                            // setPTitle(pnote.userEncodeKey)
+                            setPTitle(pnote.userEncodeKey)
                             if (pnote.userEncodeKey) {
                                 console.log(1)
                                 let strKey = pnote.userEncodeKey
@@ -113,14 +111,6 @@ const NoteDetail = () => {
             }
         })
     }
-
-    const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({
-        color: theme.palette.getContrastText(grey[500]),
-        backgroundColor: purple[500],
-        '&:hover': {
-            backgroundColor: purple[700],
-        },
-    }));
 
     return (
         <div>
@@ -155,6 +145,16 @@ const NoteDetail = () => {
                             <div style={{marginTop: 10}}>
                                 {moment(createTime).format('LLL')}
                             </div>
+                            {tagList && tagList.length && tagList.length > 0 ?
+                                <Stack direction='row' spacing={1}>
+                                    {tagList.map((item: any, index) => (
+                                        <Chip size='small' label={item.tagName} key={index}/>
+                                    ))
+                                    }
+                                </Stack>
+                                :
+                                null
+                            }
                             <TextField
                                 style={{width: '100%', marginTop: 10}}
                                 multiline
@@ -191,7 +191,7 @@ const NoteDetail = () => {
                     }
 
                     {
-                        childList && childList.length > 0 ?
+                        childList && childList.length && childList.length > 0 ?
                             <Card style={{
                                 marginTop: 20, background: theme.palette.background.default,
                                 border: '1px solid',
@@ -245,7 +245,6 @@ const NoteDetail = () => {
                     }}>{t('common.btCancel')}</Button>
                 </DialogActions>
             </Dialog>
-
             <Snackbar open={showMsg}
                       autoHideDuration={2000}
                       anchorOrigin={{vertical: "top", horizontal: 'center'}}
@@ -258,4 +257,4 @@ const NoteDetail = () => {
         </div>
     )
 }
-export default NoteDetail;
+export default NoteDetail
