@@ -9,7 +9,7 @@ import {
     Grid,
     Snackbar,
     Stack,
-    TextField
+    TextField, useMediaQuery
 } from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
@@ -25,6 +25,10 @@ import {
 import {Decrypt, Decrypt2, Encrypt, GenerateKey, GenerateRandomString16, RSAencrypt} from "../../../common/crypto";
 import moment from "moment";
 import CryptoJS from "crypto-js";
+import CardHappyMoment from "./CardHappyMoment";
+import CardMyThought from "./CardMyThought";
+import CardLongGoal from "./CardLongGoal";
+import CardToDo from "./CardToDo";
 
 const ProcrastinationEdit = () => {
     const navigate = useNavigate()
@@ -42,6 +46,7 @@ const ProcrastinationEdit = () => {
     const [title, setTitle] = useState('')
     const [createTime, setCreateTime] = useState<Date>()
     const [saving, setSaving] = useState(false)
+    const mdDown = useMediaQuery(theme.breakpoints.down('md'))
 
     useEffect(() => {
         loadAllData()
@@ -96,8 +101,8 @@ const ProcrastinationEdit = () => {
         })
     }
 
-    const onSaveProcrastination=()=>{
-        let params={
+    const onSaveProcrastination = () => {
+        let params = {
             title,
             happyYesterday,
             myThought,
@@ -117,35 +122,35 @@ const ProcrastinationEdit = () => {
         params.longGoal = Encrypt(longGoal, keyAESBase64, keyAESBase64);
         params.todayGoal = Encrypt(todayGoal, keyAESBase64, keyAESBase64);
         params.encryptKey = keyAESBase64;
-        apiRequestRsaPublicKey().then((res1:any)=>{
-            if(res1.code===0){
-                params.encryptKey=RSAencrypt(params.encryptKey, res1.data.publicKey)
-                params.keyToken=res1.data.keyToken
-                apiUpdateMyAntiDelayNote(params).then((res:any)=>{
-                    if(res.code===0){
+        apiRequestRsaPublicKey().then((res1: any) => {
+            if (res1.code === 0) {
+                params.encryptKey = RSAencrypt(params.encryptKey, res1.data.publicKey)
+                params.keyToken = res1.data.keyToken
+                apiUpdateMyAntiDelayNote(params).then((res: any) => {
+                    if (res.code === 0) {
                         setMsg(t('AntiProcrastination.tipSaveAntiDelayNoteSuccess'))
                         setMsgType('success')
                         setShowMsg(true)
                         navigate(-1)
-                    }else{
-                        setMsg(t('syserr.'+res.code))
+                    } else {
+                        setMsg(t('syserr.' + res.code))
                         setMsgType('error')
                         setShowMsg(true)
                         setSaving(false)
                     }
-                }).catch(()=>{
+                }).catch(() => {
                     setMsg(t('syserr.10001'))
                     setMsgType('error')
                     setShowMsg(true)
                     setSaving(false)
                 })
-            }else{
-                setMsg(t('syserr.'+res1.code))
+            } else {
+                setMsg(t('syserr.' + res1.code))
                 setMsgType('error')
                 setShowMsg(true)
                 setSaving(false)
             }
-        }).catch(()=>{
+        }).catch(() => {
             setMsg(t('syserr.10001'))
             setMsgType('error')
             setShowMsg(true)
@@ -200,93 +205,49 @@ const ProcrastinationEdit = () => {
                                 </Stack>
                             </div>
 
-                            <Grid container style={{marginTop: 20}} columnSpacing={2} rowSpacing={2}>
-                                <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                                    <Card style={{
-                                        background: theme.palette.background.default,
-                                        border: '1px solid',
-                                        borderColor: theme.palette.primary.main
-                                    }}>
-                                        <CardHeader title={t('AntiProcrastination.yesterday')}/>
-                                        <CardContent>
-                                            <TextField
-                                                style={{width: '100%'}}
-                                                multiline
-                                                value={happyYesterday}
-                                                onChange={e => {
-                                                    setHappyYesterday(e.target.value)
-                                                }}
-                                            />
-                                            <div style={{marginTop: 10}}>{t('AntiProcrastination.tipYesterday')}</div>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                                    <Card style={{
-                                        background: theme.palette.background.default,
-                                        border: '1px solid',
-                                        borderColor: theme.palette.primary.main
-                                    }}>
-                                        <CardHeader title={t('AntiProcrastination.myThought')}/>
-                                        <CardContent>
-                                            <TextField
-                                                style={{width: '100%'}}
-                                                multiline
-                                                value={myThought}
-                                                onChange={e => {
-                                                    setMyThought(e.target.value)
-                                                }}
-                                            />
-                                        </CardContent>
-                                        <CardActions>
-                                            {t('AntiProcrastination.tipMyThought')}
-                                        </CardActions>
-                                    </Card>
-                                </Grid>
+                            <Grid container style={{marginTop: 20}} columnSpacing={1} rowSpacing={1}>
+                                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                                    <Grid container rowSpacing={1}>
+                                        <Grid item xs={12}>
+                                            <CardHappyMoment happyYesterday={happyYesterday}
+                                                             onChangeHappyYesterday={value => {
+                                                                 setHappyYesterday(value)
+                                                             }}/>
+                                        </Grid>
 
-                                <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                                    <Card style={{
-                                        background: theme.palette.background.default,
-                                        border: '1px solid',
-                                        borderColor: theme.palette.primary.main
-                                    }}>
-                                        <CardHeader title={t('AntiProcrastination.longGoal')}/>
-                                        <CardContent>
-                                            <TextField
-                                                style={{width: '100%'}}
-                                                multiline
-                                                value={longGoal}
-                                                onChange={e => {
-                                                    setLongGoal(e.target.value)
-                                                }}
-                                            />
-                                            <div style={{marginTop: 10}}>{t('AntiProcrastination.tipLongGoal1')}</div>
-                                            <div style={{}}>{t('AntiProcrastination.tipLongGoal2')}</div>
-                                            <div style={{}}>{t('AntiProcrastination.tipLongGoal3')}</div>
-                                            <div style={{}}>{t('AntiProcrastination.tipLongGoal4')}</div>
-                                        </CardContent>
-                                    </Card>
+                                        <Grid item xs={12}>
+                                            {
+                                                mdDown ?
+                                                    <CardMyThought myThought={myThought}
+                                                                   onChangeMyThought={value => setMyThought(value)}/>
+                                                    :
+                                                    <CardLongGoal longGoal={longGoal}
+                                                                  onChangeLongGoal={value => setLongGoal(value)}/>
+                                            }
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-
-                                <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                                    <Card style={{
-                                        background: theme.palette.background.default,
-                                        border: '1px solid',
-                                        borderColor: theme.palette.primary.main
-                                    }}>
-                                        <CardHeader title={t('AntiProcrastination.whatToDoToday')}/>
-                                        <CardContent>
-                                            <TextField
-                                                style={{width: '100%'}}
-                                                multiline
-                                                value={todayGoal}
-                                                onChange={e => {
-                                                    setTodayGoal(e.target.value)
-                                                }}
-                                            />
-                                            <div style={{marginTop: 10}}>{t('AntiProcrastination.tipTodayGoal')}</div>
-                                        </CardContent>
-                                    </Card>
+                                {/* 右侧列，始终显示 <CardMyThought> 和 <CardToDo> */}
+                                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                                    <Grid container rowSpacing={1}>
+                                        <Grid item xs={12}>
+                                            {
+                                                mdDown ?
+                                                    <CardLongGoal longGoal={longGoal}
+                                                                  onChangeLongGoal={value => setLongGoal(value)}/>
+                                                    :
+                                                    <CardMyThought myThought={myThought}
+                                                                   onChangeMyThought={value => {
+                                                                       setMyThought(value)
+                                                                   }}
+                                                    />
+                                            }
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <CardToDo todayGoal={todayGoal}
+                                                      onChangeTodayGoal={value => setTodayGoal(value)}/>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
 
@@ -295,7 +256,7 @@ const ProcrastinationEdit = () => {
                                     saving ?
                                         <CircularProgress/>
                                         :
-                                        <Button variant='contained' style={{width: 140}} onClick={()=>{
+                                        <Button variant='contained' style={{width: 140}} onClick={() => {
                                             onSaveProcrastination()
                                         }}>{t('common.btSave')}</Button>
                                 }
