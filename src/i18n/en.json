@@ -21,7 +21,8 @@
     "guest": "Guest",
     "btConfirm": "Confirm",
     "btCancel": "Cancel",
-    "fromName": "From"
+    "fromName": "From",
+    "tipLoading": "Loading"
   },
   "nav": {
     "home": "Home",
@@ -448,6 +449,8 @@
     "addTag": "Add tag",
     "editTag": "Edit tag",
     "searchHolder": "Search title",
+    "tipSaving": "Saving...",
+    "tipCanceling": "Cancel update...",
     "send": {
       "sendInstantly": "Send instantly",
       "primaryCountdown": "Primary countdown",

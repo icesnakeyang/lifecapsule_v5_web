@@ -21,7 +21,8 @@
     "guest": "游客",
     "btConfirm": "确认",
     "btCancel": "取消",
-    "fromName": "来自"
+    "fromName": "来自",
+    "tipLoading": "加载中......"
   },
   "nav": {
     "home": "首页",
@@ -448,7 +449,9 @@
     "createTime": "创建时间",
     "addTag": "添加标签",
     "editTag": "编辑标签",
-    "searchHolder": "搜索标题关键字"
+    "searchHolder": "搜索标题关键字",
+    "tipSaving": "保存中......",
+    "tipCanceling": "恢复修改......"
   },
   "recipient": {
     "addRecipient": "添加接收人",

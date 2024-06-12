@@ -61,9 +61,6 @@ export function Decrypt2(word, keyStr) {
 }
 
 export function Decrypt(cipherText, keyStr, ivStr) {
-    console.log(cipherText)
-    console.log(keyStr)
-    console.log(ivStr)
     let cipherTextHexStr = CryptoJS.enc.Hex.parse(cipherText);
     let cipherTextBase64Str = CryptoJS.enc.Base64.stringify(cipherTextHexStr);
     let key = CryptoJS.enc.Utf8.parse(keyStr);

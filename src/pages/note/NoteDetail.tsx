@@ -68,11 +68,8 @@ const NoteDetail = () => {
                         let note = res.data.noteDetail
                         if (note.content && note.encrypt === 1) {
                             let strKey = note.userEncodeKey
-                            console.log(strKey)
                             strKey = Decrypt2(strKey, keyAES_1)
-                            console.log(strKey)
                             let content = Decrypt(note.content, strKey, strKey)
-                            console.log(content)
                             setContent(content)
                             setCreateTime(note.createTime)
                         }
@@ -85,16 +82,11 @@ const NoteDetail = () => {
                             setPTitle(pnote.title)
                             setPTitle(pnote.userEncodeKey)
                             if (pnote.userEncodeKey) {
-                                console.log(1)
                                 let strKey = pnote.userEncodeKey
-                                console.log(strKey)
-                                console.log(keyAES_1)
                                 strKey = Decrypt2(strKey, keyAES_1)
-                                console.log(strKey)
                                 let content = Decrypt(pnote.content, strKey, strKey)
                                 setPContent(content)
                             } else {
-                                console.log(2)
                             }
                             setPTime(pnote.sendTime)
                             setPNoteType(pnote.noteType)
@@ -175,9 +167,7 @@ const NoteDetail = () => {
                                 <CardHeader title={t('MyNotes.pNote')}/>
                                 <CardContent>
                                     <Button onClick={() => {
-                                        console.log(pNoteType)
                                         if (pNoteType && pNoteType === 'NOTE_SEND_LOG') {
-                                            console.log(sendLogId)
                                             dispatch(saveSendLogId(sendLogId))
                                             navigate('/MyReceiveNoteDetail')
                                         } else {

@@ -11,6 +11,7 @@ import noteReceiveSlice from "./noteReceiveSlice";
 import projectSlice from "./projectSlice";
 import taskTodoSlice from "./taskTodoSlice";
 import procrastinationSlice from "./procrastinationSlice";
+import noteEditSlice from "./noteEditSlice";
 
 const persistConfig = {
     key: 'root',
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     noteReceiveSlice,
     projectSlice,
     taskTodoSlice,
-    procrastinationSlice
+    procrastinationSlice,
+    noteEditSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

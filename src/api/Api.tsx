@@ -1,7 +1,8 @@
 import {Get, Post} from "./ApiBase";
 
 // const host = "http://localhost:8003/lifecapsule_api";
-const host = "http://3.1.201.129:8003/lifecapsule_api";
+// const host = "http://3.1.201.129:8003/lifecapsule_api";
+const host = "https://gogoyang.com/lifecapsule_api";
 // const host = "https://tellmeafter.com/lifecapsule_api";
 // const host = "http://192.168.1.16:8003/lifecapsule3_api";
 

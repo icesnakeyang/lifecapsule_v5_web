@@ -4,12 +4,11 @@ import {
     Box,
     Breadcrumbs,
     Button, CircularProgress,
-    Container,
     Dialog, DialogActions, DialogContent, DialogContentText,
     Snackbar,
-    Stack,
+    Stack, styled,
     Switch,
-    TextField
+    TextField, Typography
 } from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
@@ -17,7 +16,7 @@ import {useTranslation} from "react-i18next";
 import {saveEditing} from "../../store/commonSlice";
 import {apiDeleteMyNote, apiGetMyNote, apiRequestRsaPublicKey, apiSaveMyNote, apiSaveMyNoteTags} from "../../api/Api";
 import {Decrypt, Decrypt2, Encrypt, GenerateKey, GenerateRandomString16, RSAencrypt} from "../../common/crypto";
-import {saveNoteId, saveTagList} from "../../store/noteDataSlice";
+import {saveTagList} from "../../store/noteDataSlice";
 import {saveEditTags} from "../../store/tagSlice";
 import {TagModel} from "../../model/TagModel";
 import SendIcon from '@mui/icons-material/Send';
@@ -32,19 +31,20 @@ import CryptoJS from "crypto-js";
 import {useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/material/styles";
 import Header1 from "../common/Header1";
+import {saveIsChanged, saveNoteContent, saveNoteTitle} from "../../store/noteEditSlice";
+import CoverBox from "../common/msgbox/CoverBox";
+
 
 const NoteEdit = () => {
     const noteId = useSelector((state: any) => state.noteDataSlice.noteId)
-    const [title, setTitle] = useState("");
     const [encrypt, setEncrypt] = useState(true);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {t} = useTranslation();
     const [saving, setSaving] = useState(false);
-    const [editing, setEditing] = useState(false);
+    const [cancel, setCancel] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
     const [deleting, setDeleting] = useState(false);
-    const [content, setContent] = useState("");
     const editingRedux = useSelector((state: any) => state.commonSlice.editing);
     const [createTime, setCreateTime] = useState(null);
     const [modalTag, setModalTag] = useState(false)
@@ -55,6 +55,10 @@ const NoteEdit = () => {
     const [msg, setMsg] = useState('')
     const [msgType, setMsgType] = useState<AlertColor>('success')
     const [showMsg, setShowMsg] = useState(false)
+    const noteTitle = useSelector((state: any) => state.noteEditSlice.noteTitle)
+    const noteContent = useSelector((state: any) => state.noteEditSlice.noteContent)
+    const isChanged = useSelector((state: any) => state.noteEditSlice.isChanged)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         loadAllData();
@@ -67,19 +71,21 @@ const NoteEdit = () => {
     }, []);
 
     useEffect(() => {
-        if (editingRedux > 1) {
-            setEditing(true);
-        } else {
-            setEditing(false);
+        if (!isChanged) {
+            loadAllData()
         }
-    }, [editingRedux]);
+    }, [isChanged])
 
     const loadAllData = () => {
+        if (isChanged) {
+            return
+        }
         let params = {
             noteId,
             encryptKey: {},
             keyToken: "",
         };
+        setLoading(true)
         apiRequestRsaPublicKey().then((res: any) => {
             if (res.code === 0) {
                 const keyAES_1 = GenerateRandomString16();
@@ -90,22 +96,21 @@ const NoteEdit = () => {
                     if (res.code === 0) {
                         let note = res.data.note;
                         setCreateTime(note.createTime);
-                        setTitle(note.title);
+                        dispatch(saveNoteTitle(note.title));
                         if (note.encrypt === 1) {
                             let strKey = note.userEncodeKey;
-                            console.log(strKey)
                             strKey = Decrypt2(strKey, keyAES_1);
-                            console.log(strKey)
                             let content = Decrypt(note.content, strKey, strKey);
-                            console.log(content)
                             setEncrypt(true);
-                            setContent(content);
+                            dispatch(saveNoteContent(content))
                         } else {
                             setEncrypt(false);
-                            setContent(note.content);
+                            dispatch(saveNoteContent(note.content))
                         }
                         dispatch(saveTagList(res.data.noteTagList))
                         dispatch(saveEditTags(res.data.noteTagList))
+                        setCancel(false)
+                        setLoading(false)
                     } else {
                         setMsg(t('syserr.' + res.code))
                         setMsgType('error')
@@ -125,7 +130,7 @@ const NoteEdit = () => {
 
     const onSaveNote = () => {
         let params = {
-            title,
+            title: noteTitle,
             noteId,
             encrypt: 1,
             content: "",
@@ -144,7 +149,7 @@ const NoteEdit = () => {
             const uuid = GenerateKey();
             const keyAES = CryptoJS.SHA256(uuid);
             const keyAESBase64 = CryptoJS.enc.Base64.stringify(keyAES);
-            params.content = Encrypt(content, keyAESBase64, keyAESBase64);
+            params.content = Encrypt(noteContent, keyAESBase64, keyAESBase64);
             params.encryptKey = keyAESBase64;
             apiRequestRsaPublicKey()
                 .then((res: any) => {
@@ -158,9 +163,8 @@ const NoteEdit = () => {
                                     setMsg(t("MyNotes.NoteEdit.tipNoteSaveSuccess"))
                                     setMsgType("success")
                                     setShowMsg(true)
-                                    // this.$router.back()
                                     setSaving(false);
-                                    setEditing(false);
+                                    dispatch(saveIsChanged(false));
                                     dispatch(saveEditing(1));
                                 } else {
                                     setMsg(t("syserr." + res.code))
@@ -169,7 +173,8 @@ const NoteEdit = () => {
                                     setSaving(false);
                                 }
                             })
-                            .catch(() => {
+                            .catch((e) => {
+                                console.log(e)
                                 setMsg(t("syserr.10001"))
                                 setMsgType("error")
                                 setShowMsg(true)
@@ -187,10 +192,11 @@ const NoteEdit = () => {
                     setMsgType("error")
                     setShowMsg(true)
                     setSaving(false);
+                    setCancel(false)
                 });
         } else {
             params.encrypt = 0;
-            params.content = content;
+            params.content = noteContent;
             setSaving(true);
             apiSaveMyNote(params)
                 .then((res: any) => {
@@ -203,8 +209,9 @@ const NoteEdit = () => {
                         setMsgType("error")
                         setShowMsg(true)
                     }
-                    setEditing(false);
                     setSaving(false);
+                    setCancel(false)
+                    dispatch(saveIsChanged(false))
                 })
                 .catch(() => {
                     setMsg(t("syserr.10001"))
@@ -283,169 +290,193 @@ const NoteEdit = () => {
                             navigate(-1)
                         }}>{t('nav.back')}</Button>
                     </Breadcrumbs>
-                    <Box style={{}}>
-                        {/*toolbar*/}
-                        <Box style={{display: 'flex', justifyContent: 'flex-end', padding: 10}}>
-                            <Stack direction='row' spacing={1}>
-                                <Button
-                                    variant='contained'
-                                    size='small'
-                                    onClick={() => {
-                                        navigate("/NoteNew");
-                                    }}
-                                    style={{background: theme.palette.primary.dark}}
-                                >
-                                    {t("MyNotes.btNewNote")}
-                                </Button>
-                                <Button
-                                    variant='contained'
-                                    size='small'
-                                    endIcon={<SendIcon/>}
-                                    onClick={() => {
-                                        let data: SendNoteModel = {
-                                            content,
-                                            title
-                                        }
-                                        dispatch(saveSendNote(data))
-                                        navigate("/SendPage");
-                                    }}
-                                    color='secondary'
-                                >
-                                    {t("MyNotes.NoteEdit.btSend")}
-                                </Button>
-                                <Button
-                                    variant='contained'
-                                    size='small'
-                                    endIcon={<DeleteForeverIcon/>}
-                                    onClick={() => {
-                                        setModalDelete(true);
-                                    }}
-                                    color='error'
-                                >
-                                    {t("common.btDelete")}
-                                </Button>
-                            </Stack>
-                        </Box>
-                    </Box>
 
-                    {/*笔记详情*/}
-                    <Box sx={{padding: 0, display: 'flex', justifyContent: 'center'}}>
-                        <Box
-                            sx={{width: '100%'}}>
-                            {/*title*/}
-                            <Box>
-                                <TextField
-                                    variant='standard'
-                                    label={t("MyNotes.NoteEdit.title")}
-                                    value={title}
-                                    placeholder={t("MyNotes.titleHolder")}
-                                    onChange={(e) => {
-                                        setTitle(e.target.value);
-                                        setEditing(true);
-                                    }}
-                                    style={{width: '100%'}}
-                                />
-                            </Box>
+                    <Box position="relative">
+                        {(saving || cancel || loading) && (
+                            <CoverBox message={saving ? t('note.tipSaving') :
+                                cancel ? t('note.tipCanceling') :
+                                    loading ?
+                                        t('common.tipLoading') :
+                                        ''
+                            }/>
+                        )}
 
-                            {/*tags*/}
-                            <Box sx={{marginTop: 2}}>
-                                <Box style={{padding: 10}}>
-                                    <Stack direction='row' spacing={1} flexWrap='wrap'
-                                           alignItems='center'>
-                                        <Button variant='contained' size='small' onClick={() => {
-                                            setModalTag(true)
-                                        }}>
-                                            # {t('MyNotes.editTag')}
-                                        </Button>
-                                        {editTags.length > 0 ?
-                                            editTags.map((item: any, index: any) => (
-                                                <NoteEditTagRow item={item} key={index}/>
-                                            ))
-                                            : null
-                                        }
-                                    </Stack>
-                                </Box>
-                            </Box>
-
-                            <Box>
-                                <div style={{color: theme.palette.primary.main}}>
-                                    {t("MyNotes.NoteEdit.createTime")}：{moment(createTime).format("LLL")}
-                                </div>
-                            </Box>
-
-                            <Box>
-                                <div style={{display: 'flex', alignItems: 'center'}}>
-                                    <div>{t('MyNotes.NoteNew.encrypt')}：</div>
-                                    <Switch checked={encrypt} onChange={() => setEncrypt(!encrypt)}/>
-                                    <div style={{marginLeft: 10}}>
-                                        {encrypt ? <span>{t('MyNotes.NoteNew.encrypt')}</span> :
-                                            <span>{t('MyNotes.NoteNew.noEncrypt')}</span>}
-                                    </div>
-                                    <InfoIcon
-                                        style={{color: theme.palette.primary.dark, marginLeft: 10, cursor: 'pointer'}}
+                        <Box style={{}}>
+                            {/*toolbar*/}
+                            <Box style={{display: 'flex', justifyContent: 'flex-end', padding: 10}}>
+                                <Stack direction='row' spacing={1}>
+                                    <Button
+                                        variant='contained'
+                                        size='small'
                                         onClick={() => {
-                                            setShowTipEncrypt(!showTipEncrypt)
-                                        }}/>
-                                </div>
-                                <div style={{
-                                    color: theme.palette.primary.dark,
-                                    marginTop: 10,
-                                    display: 'flex',
-                                    alignItems: 'flex-start'
-                                }}>
-                                    {showTipEncrypt ?
-                                        <div
-                                            style={{
-                                                marginLeft: 10,
-                                                marginTop: 3
-                                            }}>  {t('MyNotes.NoteNew.tipEncrypt')}</div>
-                                        : null}
-                                </div>
+                                            navigate("/NoteNew");
+                                        }}
+                                        style={{background: theme.palette.primary.dark}}
+                                    >
+                                        {t("MyNotes.btNewNote")}
+                                    </Button>
+                                    <Button
+                                        variant='contained'
+                                        size='small'
+                                        endIcon={<SendIcon/>}
+                                        onClick={() => {
+                                            let data: SendNoteModel = {
+                                                content: noteContent,
+                                                title: noteTitle
+                                            }
+                                            dispatch(saveSendNote(data))
+                                            navigate("/SendPage");
+                                        }}
+                                        color='secondary'
+                                    >
+                                        {t("MyNotes.NoteEdit.btSend")}
+                                    </Button>
+                                    <Button
+                                        variant='contained'
+                                        size='small'
+                                        endIcon={<DeleteForeverIcon/>}
+                                        onClick={() => {
+                                            setModalDelete(true);
+                                        }}
+                                        color='error'
+                                    >
+                                        {t("common.btDelete")}
+                                    </Button>
+                                </Stack>
                             </Box>
+                        </Box>
 
-                            <Box sx={{marginTop: 2}}>
-                                <div style={{color: theme.palette.primary.main}}>
-                                    {t("MyNotes.content")}
-                                </div>
-                                <TextField
-                                    style={{width: '100%'}}
-                                    multiline
-                                    value={content}
-                                    placeholder={t("MyNotes.titleHolder")}
-                                    onChange={(e) => {
-                                        setContent(e.target.value);
-                                        setEditing(true);
-                                    }}
-                                />
-                            </Box>
+                        {/*笔记详情*/}
+                        <Box sx={{padding: 0, display: 'flex', justifyContent: 'center'}}>
+                            <Box
+                                sx={{width: '100%'}}>
+                                {/*title*/}
+                                <Box>
+                                    <TextField
+                                        variant='standard'
+                                        label={t("MyNotes.NoteEdit.title")}
+                                        value={noteTitle}
+                                        placeholder={t("MyNotes.titleHolder")}
+                                        onChange={(e) => {
+                                            dispatch(saveNoteTitle(e.target.value))
+                                            dispatch(saveIsChanged(true))
+                                        }}
+                                        style={{width: '100%'}}
+                                    />
+                                </Box>
 
-                            <div
-                                style={{
-                                    width: "100%",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    display: "flex",
-                                    marginTop: 20
-                                }}
-                            >
-                                {saving ? (
-                                    <CircularProgress/>
-                                ) : (
-                                    <>
-                                        {editing ? (
-                                            <Button
-                                                style={{width: "100px"}}
-                                                variant='contained'
-                                                onClick={() => {
-                                                    onSaveNote();
-                                                }}
-                                            >
-                                                {t("common.btSave")}
+                                {/*tags*/}
+                                <Box sx={{marginTop: 2}}>
+                                    <Box style={{padding: 10}}>
+                                        <Stack direction='row' spacing={1} flexWrap='wrap'
+                                               alignItems='center'>
+                                            <Button variant='contained' size='small' onClick={() => {
+                                                setModalTag(true)
+                                            }}>
+                                                # {t('MyNotes.editTag')}
                                             </Button>
-                                        ) : null}
-                                    </>
-                                )}
-                            </div>
+                                            {editTags.length > 0 ?
+                                                editTags.map((item: any, index: any) => (
+                                                    <NoteEditTagRow item={item} key={index}/>
+                                                ))
+                                                : null
+                                            }
+                                        </Stack>
+                                    </Box>
+                                </Box>
+
+                                <Box>
+                                    <div style={{color: theme.palette.primary.main}}>
+                                        {t("MyNotes.NoteEdit.createTime")}：{moment(createTime).format("LLL")}
+                                    </div>
+                                </Box>
+
+                                <Box>
+                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                        <div>{t('MyNotes.NoteNew.encrypt')}：</div>
+                                        <Switch checked={encrypt} onChange={() => setEncrypt(!encrypt)}/>
+                                        <div style={{marginLeft: 10}}>
+                                            {encrypt ? <span>{t('MyNotes.NoteNew.encrypt')}</span> :
+                                                <span>{t('MyNotes.NoteNew.noEncrypt')}</span>}
+                                        </div>
+                                        <InfoIcon
+                                            style={{
+                                                color: theme.palette.primary.dark,
+                                                marginLeft: 10,
+                                                cursor: 'pointer'
+                                            }}
+                                            onClick={() => {
+                                                setShowTipEncrypt(!showTipEncrypt)
+                                            }}/>
+                                    </div>
+                                    <div style={{
+                                        color: theme.palette.primary.dark,
+                                        marginTop: 10,
+                                        display: 'flex',
+                                        alignItems: 'flex-start'
+                                    }}>
+                                        {showTipEncrypt ?
+                                            <div
+                                                style={{
+                                                    marginLeft: 10,
+                                                    marginTop: 3
+                                                }}>  {t('MyNotes.NoteNew.tipEncrypt')}</div>
+                                            : null}
+                                    </div>
+                                </Box>
+
+                                <Box sx={{marginTop: 2}}>
+                                    <div style={{color: theme.palette.primary.main}}>
+                                        {t("MyNotes.content")}
+                                    </div>
+                                    <TextField
+                                        style={{width: '100%'}}
+                                        multiline
+                                        value={noteContent}
+                                        placeholder={t("MyNotes.titleHolder")}
+                                        onChange={(e) => {
+                                            dispatch(saveNoteContent(e.target.value))
+                                            dispatch(saveIsChanged(true))
+                                        }}
+                                    />
+                                </Box>
+
+                                <div
+                                    style={{
+                                        width: "100%",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        display: "flex",
+                                        marginTop: 20
+                                    }}
+                                >
+                                    {saving ? (
+                                        null
+                                    ) : (
+                                        <>
+                                            {isChanged ? (
+                                                <Stack direction='row' spacing={1}>
+                                                    <Button
+                                                        style={{width: "100px"}}
+                                                        variant='contained'
+                                                        onClick={() => {
+                                                            onSaveNote();
+                                                        }}
+                                                    >
+                                                        {t("common.btSave")}
+                                                    </Button>
+                                                    <Button onClick={() => {
+                                                        setCancel(true)
+                                                        dispatch(saveIsChanged(false))
+                                                        loadAllData()
+                                                    }}>{t('common.btCancel')}</Button>
+                                                </Stack>
+
+                                            ) : null}
+                                        </>
+                                    )}
+                                </div>
+                            </Box>
                         </Box>
                     </Box>
                 </div>
